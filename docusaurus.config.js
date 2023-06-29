@@ -11,10 +11,10 @@ const config = {
   favicon: 'img/logo.svg',
 
   // Set the production url of your site here
-  url: 'https://newsware.com/',
+  url: 'https://encypher-studio.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/newsware_clients_documentation',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -43,7 +43,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/encypher-studio/newsware_clients_documentation',
+            'https://github.com/encypher-studio/newsware_clients_documentation/tree/main/',
         },
         blog: false,
         theme: {
