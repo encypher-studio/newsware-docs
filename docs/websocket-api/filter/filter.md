@@ -33,11 +33,9 @@ const api = new Api(apiKey)
 api.subscribe(
     {
         tickers: ["BTC", "XRP"],
-        query: new Or([
-            new Text({
-                text: "bitcoin"
-            })
-        ])
+        query: new Text({
+            text: "bitcoin"
+        })
     },
     (news: News) => {
         // Do anything with the filtered news
