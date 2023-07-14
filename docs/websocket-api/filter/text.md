@@ -2,15 +2,14 @@
 sidebar_position: 2
 ---
 
-# TextQuery
+# Text query
 
-TextQuery is the minimum query object, it describes a text, where to look for it and how.
+A "text" query receives a text and optional options on where and how to look for it.
 
 ## Definition
 
 ```typescript
-export interface TextQuery {
-    text: string,
+export interface TextOptions {
     searchBody?: boolean // defaults to true
     searchHeadline?: boolean // defaults to true
     isRegex?: boolean, // defaults to false
@@ -20,7 +19,6 @@ export interface TextQuery {
 
 | Field          |                                                                                                                Definition                                                                                                                | Default value | Required |
 |----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|---------------|----------|
-| text           |                                                                     The text to search for. It is case insensitive, all search and news text is forced to lowercase.                                                                     |               | ✅        |
 | searchHeadline |                                                              If true, the text will be searched in the headline, if false, the headline will be skipped during the search.                                                               | True          |          |
 | searchBody     |                                                            If true, the text will be searched in the body of the news, if false, the body will be skipped during the search.                                                             | True          |          |
 | isRegex        |                                          Whether the text is a regex pattern, if true, the search will be performed using the regex pattern, otherwise the text will be searched as a literal.                                           | False         |          |
@@ -28,16 +26,15 @@ export interface TextQuery {
 
 ## Usage
 
-This query will search for all headlines starting with "bitcoin":
+This query will use regex to retrieve headlines starting with "bitcoin":
 
 ```typescript
-import {Text, News, Api, Or, And} from "newsware";
+import {text, News, Api} from "newsware";
 
 const api = new Api(apiKey)
 api.subscribe(
     {
-        query: new Text({
-            text: "^bitcoin",
+        query: text("^bitcoin", {
             searchBody: false,
             searchHeadline: true,
             isRegex: true,

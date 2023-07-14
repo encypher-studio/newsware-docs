@@ -4,25 +4,22 @@ sidebar_position: 1
 
 # Quick start
 
-Example of a websocket subscription:
+This subscription only retrieves news from Dow Jones. It retrieves them if they contain "BTC" or "XRP" as tickers.
+They are also retrieved if they mention "bitcoin", or if they mention "dogecoin" but not "elon musk":
 
 ```typescript
-import {Text, News, Api, Or, And} from "newsware";
+import {text, News, Api, or, and, Source} from "newsware";
 
 const api = new Api(apiKey)
 api.subscribe(
     {
+        sources: [Source.DowJones],
         tickers: ["BTC", "XRP"],
-        query: new Or([
-            new Text({
-                text: "bitcoin"
-            }),
-            new And([
-                new Text({
-                    text: "dogecoin"
-                }),
-                new Text({
-                    text: "elon musk",
+        query: or([
+            text("bitcoin"),
+            and([
+                text("dogecoin"),
+                text("elon musk", {
                     ignore: true
                 })
             ])
@@ -32,12 +29,3 @@ api.subscribe(
         // Do anything with the filtered news
     }
 )
-```
-
-Translates to the condition:
-
-```
-(tickers cointains "BTC" OR "XRP")
-OR 
-((mentions "bitcoin") OR (mentions "dogecoing" AND NOT mentions "elon musk"))
-```
