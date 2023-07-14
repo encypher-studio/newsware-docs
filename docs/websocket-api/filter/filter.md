@@ -12,15 +12,17 @@ Filter is the first argument received by the subscribe function.
 export interface Filter {
     query?: Query
     tickers?: string[]
+    sources?: Source[]
 }
 ```
 
 All filters are optional, if none is passed then all recent news are received without filtering.
 
-| Field      |                                             Definition                                              |
-|------------|:---------------------------------------------------------------------------------------------------:|
-| query      |                           Receives a query of type TextQuery, And, or Or.                           |
-| tickers    | Receives a list of tickers to search in the metadata. If any is present, then the news is received. |
+| Field   |                                             Definition                                              |
+|---------|:---------------------------------------------------------------------------------------------------:|
+| query   |                           Receives a query of type TextQuery, And, or Or.                           |
+| tickers | Receives a list of tickers to search in the metadata. If any is present, then the news is received. |
+| sources |                 List of sources to receive news from, refer to [Sources](./sources)                 |
 
 ## Usage
 
