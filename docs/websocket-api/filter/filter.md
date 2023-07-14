@@ -29,15 +29,13 @@ All filters are optional, if none is passed then all recent news are received wi
 Subscribe to news that have the BTC or XRP tickers, or that mention "bitcoin":
 
 ```typescript
-import {Text, News, Api, Or, And} from "newsware";
+import {text, News, Api} from "newsware";
 
 const api = new Api(apiKey)
 api.subscribe(
     {
         tickers: ["BTC", "XRP"],
-        query: new Text({
-            text: "bitcoin"
-        })
+        query: text("bitcoin")
     },
     (news: News) => {
         // Do anything with the filtered news
