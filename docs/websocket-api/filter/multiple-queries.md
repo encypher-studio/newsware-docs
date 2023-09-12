@@ -4,28 +4,22 @@ sidebar_position: 3
 
 # Multiple queries
 
-Multiple queries can be joined with And and Or conditions.
+Multiple queries can be joined with "and" and "or" conditions.
 
 ## Usage
 
 Search all news containing "bitcoin" or "crypto" or "ethereum":
 
 ```typescript
-import {Text, News, Api, Or, And} from "newsware";
+import {text, News, Api, or} from "newsware";
 
 const api = new Api(apiKey)
 api.subscribe(
     {
-        query: new Or([
-            new Text({
-                text: "bitcoin"
-            }),
-            new Text({
-                text: "crypto"
-            }),
-            new Text({
-                text: "ethereum"
-            })
+        query: or([
+            text("bitcoin"),
+            text("crypto"),
+            text("ethereum")
         ])
     },
     (news: News) => {
@@ -37,18 +31,14 @@ api.subscribe(
 Search all news containing "bitcoin" and "bull run":
 
 ```typescript
-import {Text, News, Api, Or, And} from "newsware";
+import {text, News, Api, and} from "newsware";
 
 const api = new Api(apiKey)
 api.subscribe(
     {
-        query: new And([
-            new Text({
-                text: "bitcoin"
-            }),
-            new Text({
-                text: "bull run"
-            })
+        query: and([
+            text("bitcoin"),
+            text("bull run")
         ])
     },
     (news: News) => {
