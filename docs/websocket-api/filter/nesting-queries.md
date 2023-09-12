@@ -15,15 +15,15 @@ import {text, News, Api, or, and} from "newsware";
 const api = new Api(apiKey)
 api.subscribe(
     {
-        query: or([
+        query: or(
             text("bitcoin"),
-            and([
+            and(
                 text("dogecoin"),
                 text("elon musk", {
                     ignore: true
                 })
-            ])
-        ])
+            )
+        )
     },
     (news: News) => {
         // Do anything with the filtered news

@@ -16,11 +16,11 @@ import {text, News, Api, or} from "newsware";
 const api = new Api(apiKey)
 api.subscribe(
     {
-        query: or([
+        query: or(
             text("bitcoin"),
             text("crypto"),
             text("ethereum")
-        ])
+        )
     },
     (news: News) => {
         // Do anything with the filtered news
@@ -36,10 +36,10 @@ import {text, News, Api, and} from "newsware";
 const api = new Api(apiKey)
 api.subscribe(
     {
-        query: and([
+        query: and(
             text("bitcoin"),
             text("bull run")
-        ])
+        )
     },
     (news: News) => {
         // Do anything with the filtered news
