@@ -21,18 +21,25 @@ function HomepageHeader() {
         </div>
         <p className="hero__subtitle text--secondary text--semibold">{siteConfig.tagline}</p>
         <div className={styles.buttons + " row"}>
-          <div className={clsx('col col--6')}>
+          <div className={clsx('col col--4')}>
             <Link
               className="button button--secondary button--lg"
               to="/docs">
               JS/TS Client
             </Link>
           </div>
-          <div className={clsx('col col--6 margin-top--md')}>
+          <div className={clsx('col col--4 margin-top--md')}>
             <Link
               className="button button--secondary button--lg"
               to="pathname:///asyncapi">
               WebSocket Docs
+            </Link>
+          </div>
+          <div className={clsx('col col--4 margin-top--md')}>
+            <Link
+              className="button button--secondary button--lg"
+              to="https://newsware.readme.io/">
+              REST Docs
             </Link>
           </div>
         </div>
