@@ -36,8 +36,8 @@ This subscription will return:
 import {text, News, Api} from "newsware";
 
 const api = new Api(apiKey)
-api.subscribe(
-    {
+api.subscribe({
+    filter: {
         query: and(
             text("bitcoin"),
             text("ethereum", {ignore: true})
@@ -45,8 +45,8 @@ api.subscribe(
         tickers: ["BTC", "XRP"],
         ciks: [1805719, 1557593]
     },
-    (news: News) => {
+    callback: (news: News) => {
         // Do anything with the filtered news
     }
-)
+})
 ```

@@ -30,8 +30,8 @@ This query will retrieve headlines that mention "bitcoin", but ignore them if th
 import {text, News, Api} from "newsware";
 
 const api = new Api(apiKey)
-api.subscribe(
-    {
+api.subscribe({
+    filter: {
         query: and(
             text("bitcoin", {
                 searchBody: false,
@@ -45,9 +45,9 @@ api.subscribe(
             })
         )
     },
-    (news: News) => {
+    callback: (news: News) => {
         // Do anything with the filtered news
     }
-)
+})
 ```
 
