@@ -27,7 +27,8 @@ channels:
             ]
           },
           "tickers": ["APPL", "BMW", "BTC"],
-          "ciks": [1805719, 1557593]
+          "ciks": [1805719, 1557593],
+          "sources": ["DJ", "AR", "PZ", "PN", "BW", "SEC"]
         }
         ```
       message:
@@ -73,15 +74,8 @@ components:
           description: A list of tickers related to the news
           example: [ APPL, HSBC ]
         source:
-          type: string
-          description: Source of the news
-          enum:
-            - DJ
-            - AR
-            - PZ
-            - PN
-            - BW
-            - SEC
+          description: Source of the news.
+          $ref: '#/components/schemas/Source'
           example: SEC
         publicationTime:
           type: string
@@ -107,21 +101,7 @@ components:
           example: https://www.sec.gov/Archives/edgar/data/1692705/000110465923099095/0001104659-23-099095-index.htm
     NewsFilter:
       description: |
-        Used to filter news by publication time, tickers and a query.
-        
-        Example:
-        ```json
-        {
-          "query": {
-            "and": [
-              {"text": "bitcoin", "searchHeadline": "true"},
-              {"text": "bull run", "searchBody": "true", "ignore": "true"}
-            ]
-          },
-          "tickers": ["APPL", "BMW", "BTC"],
-          "ciks": [1805719, 1557593]
-        }
-        ```
+        Used to filter news by publication time, tickers, ciks, sources, and a query.
       properties:
         tickers:
           description: A list of tickers. If the ticker exists in the news, it will be fetched.
@@ -135,6 +115,11 @@ components:
             type: integer
         query:
           $ref: '#/components/schemas/NewsQuery'
+        sources:
+          description: A list of sources. Only news from these sources will be fetched. If empty, all sources are fetched.
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
     NewsQuery:
       type: object
       description: |
@@ -171,13 +156,27 @@ components:
           description: "A list of queries that wil be joined by an \"and\" condition. It can contain a {text: ...} filter, or nested conditions in the form of {and: ...} or {or: ...}"
           items:
             $ref: '#/components/schemas/NewsQuery'
-          example: [ { text: "btc" }, { and: [ { text: "bitcoin" }, { text: "bull run" } ] } ]
+          example:
+            - text: "btc"
+              searchHeadline: "true"
+            - and:
+                - text: "bitcoin"
+                  searchBody: "true"
+                - text: "bull run"
+                  searchBody: "true"
         or:
           type: array
           description: "A list of queries that wil be joined by an \"or\" condition. It can contain a {text: ...} filter, or nested conditions in the form of {and: ...} or {or: ...}"
           items:
             $ref: '#/components/schemas/NewsQuery'
-          example: [ { text: "btc" }, { and: [ { text: "bitcoin" }, { text: "bull run" } ] } ]
+          example:
+            - text: "btc"
+              searchHeadline: "true"
+            - or:
+                - text: "bitcoin"
+                  searchBody: "true"
+                - text: "bull run"
+                  searchBody: "true"
         text:
           type: object
           description: Describes a term to look for and where to look for it.
@@ -198,4 +197,17 @@ components:
               type: boolean
               description: Whether to ignore news that contain the text
               example: false
-          example: { "text": "bull run", "searchBody": "true", "searchHeadline": "false", "ignore": "true" }
+          example:
+            text: "bull run"
+            searchBody: "true"
+            searchHeadline: "false"
+            ignore: "true"
+    Source:
+      type: string
+      enum:
+        - DJ
+        - AR
+        - PZ
+        - PN
+        - BW
+        - SEC
