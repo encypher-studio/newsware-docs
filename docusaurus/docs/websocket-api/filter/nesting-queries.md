@@ -13,8 +13,8 @@ Search all news containing "bitcoin" or containing "dogecoin" but not "elon musk
 import {text, News, Api, or, and} from "newsware";
 
 const api = new Api(apiKey)
-api.subscribe(
-    {
+api.subscribe({
+    filter: {
         query: or(
             text("bitcoin"),
             and(
@@ -25,8 +25,8 @@ api.subscribe(
             )
         )
     },
-    (news: News) => {
+    callback: (news: News) => {
         // Do anything with the filtered news
     }
-)
+})
 ```

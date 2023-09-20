@@ -25,13 +25,13 @@ This query will return all news from Dow Jones and Access Wire:
 import {Api, News, Source} from "newsware";
 
 const api = new Api(apiKey)
-api.subscribe(
-    {
+api.subscribe({
+    filter: {
         sources: [Source.DowJones, Source.AccessWire]
     },
-    (news: News) => {
+    callback: (news: News) => {
         // Do anything with the filtered news
     }
-)
+})
 ```
 

@@ -11,24 +11,26 @@ The subscribe function is used to subscribe to news updates using the Websocket 
 It accepts the following arguments:
 
 ```typescript
-function subscribe(
+function subscribe(options: {
     filter: Filter,
-    callback: (news: News) => void,
+    callback: (news: News[]) => void,
     errorCallback?: (errorEvent: ErrorEvent) => void,
     openCallback?: () => void,
-    closeCallback?: (closeEvent: CloseEvent) => void
-) {
+    closeCallback?: (closeEvent: CloseEvent) => void,
+    automaticReconnect?: boolean
+}) {
 ...
 }
 ```
 
-| Name          | Definition                                                           | Required |
-|---------------|----------------------------------------------------------------------|----------|
-| filter        | An object used to filter news, refer to [Filter](./filter)           | ✅        |
-| callback      | The filtered news will be passed to this callback                    | ✅        |
-| errorCallback | A callback to receive websocket errors                               |          |
-| openCallback  | A callback to be called when the websocket connection is established |          |
-| closeCallback | A callback to be called if the websocket connection is closed        |          |
+| Name               | Definition                                                                                    | Required |
+|--------------------|-----------------------------------------------------------------------------------------------|----------|
+| filter             | An object used to filter news, refer to [Filter](./filter)                                    | ✅        |
+| callback           | The filtered news will be passed to this callback                                             | ✅        |
+| errorCallback      | A callback to receive websocket errors                                                        |          |
+| openCallback       | A callback to be called when the websocket connection is established                          |          |
+| closeCallback      | A callback to be called if the websocket connection is closed                                 |          |
+| automaticReconnect | (Defaults to true) If true, it attempts to reconnect if the connection is closed unexpectedly |          |
 
 # Usage
 
@@ -39,25 +41,25 @@ import {Api, News} from "newsware"
 import {ErrorEvent, CloseEvent} from "ws";
 
 const api = new Api(apiKey)
-api.subscribe(
-    {
+api.subscribe({
+    filter: {
         // Add filters here
     },
     // On news received
-    (news: News) => {
+    callback: (news: News) => {
         console.log(news)
     },
-    // On error
-    (error: ErrorEvent) => {
+    // (Optional) On error
+    errorCallback: (error: ErrorEvent) => {
         console.log("Websocket error: " + error.message)
     },
-    // On connection opened
-    () => {
+    // (Optional) On connection opened
+    openCallback: () => {
         console.log("Connection established, waiting for news...")
     },
-    // On connection closed
-    (_: CloseEvent) => {
+    // (Optional) On connection closed
+    closeCallback: (_: CloseEvent) => {
         console.log("Connection closed")
     }
-)
+})
 ````

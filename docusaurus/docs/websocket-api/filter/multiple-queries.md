@@ -14,18 +14,18 @@ Search all news containing "bitcoin" or "crypto" or "ethereum":
 import {text, News, Api, or} from "newsware";
 
 const api = new Api(apiKey)
-api.subscribe(
-    {
+api.subscribe({
+    filter: {
         query: or(
             text("bitcoin"),
             text("crypto"),
             text("ethereum")
         )
     },
-    (news: News) => {
+    callback: (news: News) => {
         // Do anything with the filtered news
     }
-)
+})
 ```
 
 Search all news containing "bitcoin" and "bull run":
@@ -34,15 +34,15 @@ Search all news containing "bitcoin" and "bull run":
 import {text, News, Api, and} from "newsware";
 
 const api = new Api(apiKey)
-api.subscribe(
-    {
+api.subscribe({
+    filter: {
         query: and(
             text("bitcoin"),
             text("bull run")
         )
     },
-    (news: News) => {
+    callback: (news: News) => {
         // Do anything with the filtered news
     }
-)
+})
 ```

@@ -15,8 +15,8 @@ This subscription retrieves:
 import {text, News, Api, or, and, Source} from "newsware";
 
 const api = new Api(apiKey)
-api.subscribe(
-    {
+api.subscribe({
+    filter: {
         sources: [Source.DowJones],
         query: or(
             text("bitcoin"),
@@ -30,7 +30,7 @@ api.subscribe(
         tickers: ["BTC", "XRP"],
         ciks: [1805719, 1557593]
     },
-    (news: News) => {
+    callback: (news: News) => {
         // Do anything with the filtered news
     }
-)
+})
