@@ -21,12 +21,16 @@ All filters are optional, if none is passed then all recent news are received wi
 | Field   |                                Definition                                 |
 |---------|:-------------------------------------------------------------------------:|
 | query   |                Receives a query of type or, and, or text.                 |
-| tickers | Receives a list of tickers. If any is present, then the news is received. |
 | sources |    List of sources to receive news from, refer to [Sources](./sources)    |
+| tickers |     A list of tickers. If any is present, then the news is received.      |
+| ciks    | A list of CIKs. If any is present in the SEC filing, it will be received. |
 
 ## Usage
 
-Subscribe to news that have the BTC or XRP tickers, or that mention "bitcoin" but not "ethereum":
+This subscription will return:
+* News that mention "bitcoin" but not "ethereum".
+* News that have BTC or XRP tickers
+* SEC filings related to 1805719 or 1557593 CIKs.
 
 ```typescript
 import {text, News, Api} from "newsware";
@@ -34,11 +38,12 @@ import {text, News, Api} from "newsware";
 const api = new Api(apiKey)
 api.subscribe(
     {
-        tickers: ["BTC", "XRP"],
         query: and(
             text("bitcoin"),
             text("ethereum", {ignore: true})
-        )
+        ),
+        tickers: ["BTC", "XRP"],
+        ciks: [1805719, 1557593]
     },
     (news: News) => {
         // Do anything with the filtered news
