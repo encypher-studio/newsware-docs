@@ -21,12 +21,13 @@ channels:
         ```json
         {
           "query": {
-            "text": "text to look for",
-            "searchHeadline": "true",
-            "searchBody": "false",
-            "ignore": "false"
+            "and": [
+              {"text": "bitcoin", "searchHeadline": "true"},
+              {"text": "bull run", "searchBody": "true", "ignore": "true"}
+            ]
           },
-          "tickers": ["APPL", "BMW", "BTC"]
+          "tickers": ["APPL", "BMW", "BTC"],
+          "ciks": [1805719, 1557593]
         }
         ```
       message:
@@ -117,19 +118,23 @@ components:
               {"text": "bull run", "searchBody": "true", "ignore": "true"}
             ]
           },
-          "tickers": ["APPL", "BMW", "BTC"]
+          "tickers": ["APPL", "BMW", "BTC"],
+          "ciks": [1805719, 1557593]
         }
         ```
       properties:
         tickers:
-          $ref: '#/components/schemas/NewsTickers'
+          description: A list of tickers. If the ticker exists in the news, it will be fetched.
+          type: array
+          items:
+            type: string
+        ciks:
+          description: A list of CIKs. If the ticker exists in the SEC filing, it will be fetched.
+          type: array
+          items:
+            type: string
         query:
           $ref: '#/components/schemas/NewsQuery'
-    NewsTickers:
-      description: A list of tickers to search for.
-      type: array
-      items:
-        type: string
     NewsQuery:
       type: object
       description: |

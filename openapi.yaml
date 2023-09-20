@@ -114,6 +114,7 @@ components:
             ]
           },
           "tickers": ["APPL", "BMW", "BTC"],
+          "ciks": [1805719, 1557593],
           "pagination": {"limit": 10, "page": 2},
           "publishedBefore": 1695102611,
           "publishedAfter": 0
@@ -129,7 +130,15 @@ components:
           description: UNIX timestamp. Blank or less than 1 to ignore.
           $ref: '#/components/schemas/NewsTimeLimit'
         tickers:
-          $ref: '#/components/schemas/NewsTickers'
+          description: A list of tickers. If the ticker exists in the news, it will be fetched.
+          type: array
+          items:
+            type: string
+        ciks:
+          description: A list of CIKs. If the ticker exists in the SEC filing, it will be fetched.
+          type: array
+          items:
+            type: string
         query:
           $ref: '#/components/schemas/NewsQuery'
       example: |
@@ -141,6 +150,7 @@ components:
             ]
           },
           "tickers": ["APPL", "BMW", "BTC"],
+          "ciks": [1805719, 1557593],
           "pagination": {"limit": 10, "page": 2},
           "publishedBefore": 1695102611,
           "publishedAfter": 0
@@ -164,11 +174,6 @@ components:
           maximum: 10000
           default: 10
           required: true
-    NewsTickers:
-      description: A list of tickers to search for.
-      type: array
-      items: 
-        type: string
     NewsQuery:
       description: |
         Filter for news. Properties are mutually exclusive, only one of "and", "or" or "text" can be set.

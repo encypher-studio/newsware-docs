@@ -4,8 +4,12 @@ sidebar_position: 1
 
 # Quick start
 
-This subscription retrieves news from Dow Jones. It retrieves them if they contain "BTC" or "XRP" as tickers.
-They are also retrieved if they mention "bitcoin", or if they mention "dogecoin" but not "elon musk":
+This subscription retrieves: 
+
+* Only news from Dow Jones.
+* News that mention "bitcoin", or if they mention "dogecoin" but not "elon musk":
+* News that have "BTC" or "XRP" as tickers.
+* SEC filings related to 1805719 or 1557593 CIKs.
 
 ```typescript
 import {text, News, Api, or, and, Source} from "newsware";
@@ -14,7 +18,6 @@ const api = new Api(apiKey)
 api.subscribe(
     {
         sources: [Source.DowJones],
-        tickers: ["BTC", "XRP"],
         query: or(
             text("bitcoin"),
             and(
@@ -23,7 +26,9 @@ api.subscribe(
                     ignore: true
                 })
             )
-        )
+        ),
+        tickers: ["BTC", "XRP"],
+        ciks: [1805719, 1557593]
     },
     (news: News) => {
         // Do anything with the filtered news
