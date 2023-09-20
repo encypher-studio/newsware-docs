@@ -138,7 +138,7 @@ components:
           description: A list of CIKs. If the ticker exists in the SEC filing, it will be fetched.
           type: array
           items:
-            type: string
+            type: integer
         query:
           $ref: '#/components/schemas/NewsQuery'
       example: |
