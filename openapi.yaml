@@ -13,7 +13,7 @@ paths:
       security:
         - ApiKeyHeader: []
         - ApiKeyQuery: []
-      requestBody: 
+      requestBody:
         description: |
           Used to filter news by publication time, tickers and a query.
         content:
@@ -52,15 +52,8 @@ paths:
                       description: A list of tickers related to the news
                       example: [ APPL, HSBC ]
                     source:
-                      type: string
                       description: Source of the news
-                      enum:
-                        - DJ
-                        - AR
-                        - PZ
-                        - PN
-                        - BW
-                        - SEC
+                      $ref: '#/components/schemas/Source'
                       example: SEC
                     publicationTime:
                       type: string
@@ -115,6 +108,7 @@ components:
           },
           "tickers": ["APPL", "BMW", "BTC"],
           "ciks": [1805719, 1557593],
+          "sources": ["DJ", "AR", "PZ", "PN", "BW", "SEC"],
           "pagination": {"limit": 10, "page": 2},
           "publishedBefore": 1695102611,
           "publishedAfter": 0
@@ -141,26 +135,44 @@ components:
             type: integer
         query:
           $ref: '#/components/schemas/NewsQuery'
-      example: |
-        {
-          "query": {
-            "and": [
-              {"text": "bitcoin", "searchHeadline": "true"},
-              {"text": "bull run", "searchBody": "true", "ignore": "true"}
-            ]
-          },
-          "tickers": ["APPL", "BMW", "BTC"],
-          "ciks": [1805719, 1557593],
-          "pagination": {"limit": 10, "page": 2},
-          "publishedBefore": 1695102611,
-          "publishedAfter": 0
-        }
+        sources:
+          description: A list of sources. Only news from theses sources will be fetched. If empty, all sources are fetched.
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+      example:
+        query:
+          and:
+            - text: bitcoin
+              searchHeadline: true
+            - text: bull run
+              searchBody: true
+              ignore: true
+          tickers:
+            - APPL
+            - BMW
+            - BTC
+          ciks:
+            - 1805719
+            - 1557593
+          sources:
+            - DJ
+            - AR
+            - PZ
+            - PN
+            - BW
+            - SEC
+          pagination:
+            limit: 10
+            page: 2
+          publishedBefore: 1695102611
+          publishedAfter: 0
     NewsTimeLimit:
       description: A UNIX timestamp. If set to 0 or less, the limit is not applied.
       type: integer
     NewsPagination:
       description: Describes how many items per page and what page to fetch.
-      properties: 
+      properties:
         page:
           description: Current page, the first page is 1.
           minimum: 1
@@ -198,13 +210,27 @@ components:
           description: "A list of queries that wil be joined by an \"and\" condition. It can contain a {text: ...} filter, or nested conditions in the form of {and: ...} or {or: ...}"
           items:
             $ref: '#/components/schemas/NewsQuery'
-          example: [ { text: "btc" }, { and: [ { text: "bitcoin" }, { text: "bull run" } ] } ]
+          example:
+            - text: "btc"
+              searchHeadline: "true"
+            - and:
+                - text: "bitcoin"
+                  searchBody: "true"
+                - text: "bull run"
+                  searchBody: "true"
         or:
           type: array
           description: "A list of queries that wil be joined by an \"or\" condition. It can contain a {text: ...} filter, or nested conditions in the form of {and: ...} or {or: ...}"
           items:
             $ref: '#/components/schemas/NewsQuery'
-          example: [ { text: "btc" }, { and: [ { text: "bitcoin" }, { text: "bull run" } ] } ]
+          example:
+            - text: "btc"
+              searchHeadline: "true"
+            - or:
+                - text: "bitcoin"
+                  searchBody: "true"
+                - text: "bull run"
+                  searchBody: "true"
         text:
           type: object
           description: Describes a term to look for and where to look for it.
@@ -225,4 +251,17 @@ components:
               type: boolean
               description: Whether to ignore news that contain the text
               example: false
-          example: {"text": "bull run", "searchBody": "true", "searchHeadline": "false", "ignore": "true"}
+          example:
+            text: "bull run"
+            searchBody: "true"
+            searchHeadline: "false"
+            ignore: "true"
+    Source:
+      type: string
+      enum:
+        - DJ
+        - AR
+        - PZ
+        - PN
+        - BW
+        - SEC
