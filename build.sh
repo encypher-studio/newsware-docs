@@ -9,8 +9,3 @@ rm -rf build
 )
   
 cp -r ./docusaurus/build ./build
-
-npm install
-npx asyncapi generate fromTemplate asyncapi.yaml @asyncapi/html-template@0.28.4 -o ./asyncapi --force-write
-rm -rf ./build/asyncapi
-cp -r ./asyncapi ./build/asyncapi
