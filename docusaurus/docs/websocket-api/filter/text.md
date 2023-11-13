@@ -10,17 +10,17 @@ A "text" query receives a text and optional options on where and how to look for
 
 ```typescript
 export interface TextOptions {
-    searchBody?: boolean // defaults to true
-    searchHeadline?: boolean // defaults to true
-    ignore?: boolean // defaults to false
+    onlyBody?: boolean
+    onlyHeadline?: boolean
+    ignore?: boolean
 }
 ```
 
-| Field          |                                                                                                                Definition                                                                                                                | Default value | Required |
-|----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|---------------|----------|
-| searchHeadline |                                                              If true, the text will be searched in the headline, if false, the headline will be skipped during the search.                                                               | True          |          |
-| searchBody     |                                                            If true, the text will be searched in the body of the news, if false, the body will be skipped during the search.                                                             | True          |          |
-| ignore         | Whether to ignore matches. If true, if a match is found then that record will be ignored and not sent to the WS connection. For example, if you choose to ignore the text “bitcoin”, then no news that mention bitcoin will be received. | False         |          |
+| Field        |                                                               Definition                                                                | Default value | Required |
+|--------------|:---------------------------------------------------------------------------------------------------------------------------------------:|---------------|----------|
+| onlyHeadline |                                   If true, the text will be searched only in the headline of the news                                   | False         |          |
+| onlyBody     |                                     If true, the text will be searched only in the body of the news                                     | False         |          |
+| ignore       | Whether to ignore matches. For example, if you choose to ignore the text “bitcoin”, then no news that mention bitcoin will be received. | False         |          |
 
 ## Usage
 
@@ -37,16 +37,15 @@ const wsApi = new WsApi(apiKey, {
             filter: {
                 query: and(
                     text("bitcoin", {
-                        searchBody: false,
-                        searchHeadline: true,
+                        onlyHeadline: true,
                         ignore: false
                     }),
                     text("scam", {
-                        searchBody: true,
-                        searchHeadline: false,
+                        onlyBody: true,
                         ignore: true
                     })
-                )            }
+                )            
+            }
         })
     },
     callback: (message: WebsocketResponse) => {

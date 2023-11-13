@@ -213,12 +213,12 @@ components:
               {
                 "type": "text",
                 "term": "bitcoin",
-                "searchHeadline": "true"
+                "onlyHeadline": "true"
               },
               {
                 "type": "text",
                 "term": "bull run",
-                "searchBody": "true",
+                "onlyBody": "true",
                 "ignore": "true"
               }
             ]
@@ -263,12 +263,12 @@ components:
             {
               "type": "text",
               "term": "bitcoin",
-              "searchHeadline": true
+              "onlyHeadline": true
             },
             {
               "type": "text",
               "term": "scam",
-              "searchBody": true,
+              "onlyBody": true,
               "ignore": true
             }
           ]
@@ -289,18 +289,18 @@ components:
                 {
                   "type": "text",
                   "term": "bitcoin", 
-                  "searchHeadline": true
+                  "onlyHeadline": true
                 },
                 {
                   "type": "text",
                   "term": "bull run",
-                  "searchHeadline": true}
+                  "onlyHeadline": true}
               ]
             },
             { 
               "type": "text",
               "term": "dollar",
-              "searchHeadline": true}
+              "onlyHeadline": true}
           ]
         }
         ```
@@ -326,13 +326,13 @@ components:
           type: string
           description: Term to search for
           example: bitcoin
-        searchBody:
+        onlyBody:
           type: boolean
-          description: Whether to search for the term in the body or not
+          description: If true, the term will be searched only in the body of the news, and not the headline.
           example: true
-        searchHeadline:
+        onlyHeadline:
           type: boolean
-          description: Whether to search for the term in the headline or not
+          description: If true, the term will be searched only in the headline.
           example: true
         ignore:
           type: boolean
