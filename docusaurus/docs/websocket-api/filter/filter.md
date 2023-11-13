@@ -32,21 +32,29 @@ This subscription will return:
 * News that have BTC or XRP tickers
 * SEC filings related to 1805719 or 1557593 CIKs.
 
-```typescript
-import {text, News, Api} from "newsware";
+````typescript
+import {WebsocketResponse, WsApi, and, text} from "newsware";
 
-const api = new Api(apiKey)
-api.subscribe({
-    filter: {
-        query: and(
-            text("bitcoin"),
-            text("ethereum", {ignore: true})
-        ),
-        tickers: ["BTC", "XRP"],
-        ciks: [1805719, 1557593]
+const wsApi = new WsApi(apiKey, {
+    // Subscribe once the connection is open
+    openCallback: () => {
+        wsApi.subscribe({
+            subscriptionId: "trackableId",
+            filter: {
+                query: and(
+                    text("bitcoin"),
+                    text("ethereum", {ignore: true})
+                ),
+                tickers: ["BTC", "XRP"],
+                ciks: [1805719, 1557593]
+            }
+        })
     },
-    callback: (news: News) => {
-        // Do anything with the filtered news
+    callback: (message: WebsocketResponse) => {
+        if (message.method === WebsocketMethod.SUBSCRIBE
+            && message.type === WebsocketResponseType.DATA) {
+            // Do anything with the filtered news
+        }
     }
 })
-```
+````

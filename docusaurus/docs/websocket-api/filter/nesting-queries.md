@@ -7,26 +7,37 @@ sidebar_position: 4
 "and" and "or" queries can be nested.
 
 ## Usage
-Search all news containing "bitcoin" or containing "dogecoin" but not "elon musk":
+This query will retrieve news if any of the following is true:
 
-```typescript
-import {text, News, Api, or, and} from "newsware";
+- Mentions "bitcoin"
+- Mentions "dogecoin" but not "elon musk":
 
-const api = new Api(apiKey)
-api.subscribe({
-    filter: {
-        query: or(
-            text("bitcoin"),
-            and(
-                text("dogecoin"),
-                text("elon musk", {
-                    ignore: true
-                })
-            )
-        )
+````typescript
+import {WebsocketResponse, WsApi, and, text, or} from "newsware";
+
+const wsApi = new WsApi(apiKey, {
+    // Subscribe once the connection is open
+    openCallback: () => {
+        wsApi.subscribe({
+            subscriptionId: "trackableId",
+            filter: {
+                query: or(
+                    text("bitcoin"),
+                    and(
+                        text("dogecoin"),
+                        text("elon musk", {
+                            ignore: true
+                        })
+                    )
+                )
+            }
+        })
     },
-    callback: (news: News) => {
-        // Do anything with the filtered news
+    callback: (message: WebsocketResponse) => {
+        if (message.method === WebsocketMethod.SUBSCRIBE
+            && message.type === WebsocketResponseType.DATA) {
+            // Do anything with the filtered news
+        }
     }
 })
-```
+````

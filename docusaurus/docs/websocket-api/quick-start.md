@@ -4,33 +4,40 @@ sidebar_position: 1
 
 # Quick start
 
-This subscription retrieves: 
+This subscription retrieves news from Dow Jones and SEC if any of the following is true: 
 
-* Only news from Dow Jones.
-* News that mention "bitcoin", or if they mention "dogecoin" but not "elon musk":
-* News that have "BTC" or "XRP" as tickers.
+* Mentions "bitcoin", or mentions "dogecoin" but not "elon musk":
+* Have "BTC" or "XRP" as tickers.
 * SEC filings related to 1805719 or 1557593 CIKs.
 
 ```typescript
-import {text, News, Api, or, and, Source} from "newsware";
+import {text, WsApi, or, and, Source, WebsocketResponse} from "newsware";
 
-const api = new Api(apiKey)
-api.subscribe({
-    filter: {
-        sources: [Source.DowJones],
-        query: or(
-            text("bitcoin"),
-            and(
-                text("dogecoin"),
-                text("elon musk", {
-                    ignore: true
-                })
-            )
-        ),
-        tickers: ["BTC", "XRP"],
-        ciks: [1805719, 1557593]
-    },
-    callback: (news: News) => {
-        // Do anything with the filtered news
-    }
+const wsApi = new WsApi(apiKey, {
+        // Subscribe once the connection is open
+        openCallback: () => {
+            wsApi.subscribe({
+                subscriptionId: "trackableId",
+                filter: {
+                    sources: [Source.DowJones, Source.SEC],
+                    query: or(
+                        text("bitcoin"),
+                        and(
+                            text("dogecoin"),
+                            text("elon musk", {
+                                ignore: true
+                            })
+                        )
+                    ),
+                    tickers: ["BTC", "XRP"],
+                    ciks: [1805719, 1557593]
+                },
+            })
+        },
+        callback: (message: WebsocketResponse) => {
+            if (message.method === WebsocketMethod.SUBSCRIBE 
+                && message.type === WebsocketResponseType.DATA) {
+                // Do anything with the filtered news
+            }
+        }
 })
