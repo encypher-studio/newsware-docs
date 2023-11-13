@@ -338,9 +338,6 @@ components:
           type: boolean
           description: Whether to ignore news that contain the term. Works as a NOT query.
           example: false
-        exactMatch:
-          type: boolean
-          description: If true, all the words in the term have to match. If false, any words in the term may match
     Source:
       type: string
       enum:
