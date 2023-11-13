@@ -1,0 +1,29 @@
+name: Deploy AsyncAPI documentation
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  deploy-doc:
+    if: ${{ github.event_name == 'push' }}
+    name: Deploy API documentation on Bump.sh
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Deploy API documentation
+        uses: bump-sh/github-action@v1
+        with:
+          doc: 2acf0e70-312e-420b-a1cd-f2f1b0a8fea3
+          token: ${{secrets.BUMP_TOKEN}}
+          file: asyncapi/asyncapi.yaml

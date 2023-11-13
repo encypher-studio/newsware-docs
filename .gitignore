@@ -1,5 +1,5 @@
 build
-asyncapi
 .idea
 node_modules
 .DS_Store
+asyncapi-build
