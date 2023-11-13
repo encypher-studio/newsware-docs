@@ -58,17 +58,4 @@ It's a [WebsocketResponse](#WebsocketResponse) with a payload of type:
 
 # Usage
 
-This subscription returns all unfiltered news and implements all callbacks:
-
-````typescript
-import {Api, News} from "newsware"
-import {ErrorEvent, CloseEvent} from "ws";
-
-const api = new Api(apiKey)
-api.subscribe({
-    subscriptionId: "trackableId",
-    filter: {
-        // Add filters here
-    }
-})
-````
+Refer to [Quick Start](./quick-start.md).

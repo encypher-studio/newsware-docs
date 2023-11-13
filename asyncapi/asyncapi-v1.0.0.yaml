@@ -28,7 +28,7 @@ channels:
           },
           "tickers": ["APPL", "BMW", "BTC"],
           "ciks": [1805719, 1557593],
-          "sources": ["DJ", "AR", "PZ", "PN", "BW", "SEC"]
+          "sources": ["DJ", "AR", "PZ", "PN", "BW", "SEC", "HS"]
         }
         ```
       message:
@@ -211,3 +211,4 @@ components:
         - PN
         - BW
         - SEC
+        - HS

@@ -108,7 +108,7 @@ components:
           },
           "tickers": ["APPL", "BMW", "BTC"],
           "ciks": [1805719, 1557593],
-          "sources": ["DJ", "AR", "PZ", "PN", "BW", "SEC"],
+          "sources": ["DJ", "AR", "PZ", "PN", "BW", "SEC", "HS"],
           "pagination": {"limit": 10, "page": 2},
           "publishedBefore": 1695102611,
           "publishedAfter": 0
@@ -162,6 +162,7 @@ components:
             - PN
             - BW
             - SEC
+            - HS
           pagination:
             limit: 10
             page: 2
@@ -265,3 +266,4 @@ components:
         - PN
         - BW
         - SEC
+        - HS
