@@ -26,28 +26,35 @@ export interface TextOptions {
 
 This query will retrieve headlines that mention "bitcoin", but ignore them if the body mentions "scam":
 
-```typescript
-import {text, News, Api} from "newsware";
+````typescript
+import {WebsocketResponse, WsApi, and, text} from "newsware";
 
-const api = new Api(apiKey)
-api.subscribe({
-    filter: {
-        query: and(
-            text("bitcoin", {
-                searchBody: false,
-                searchHeadline: true,
-                ignore: false
-            }),
-            text("scam", {
-                searchBody: true,
-                searchHeadline: false,
-                ignore: true
-            })
-        )
+const wsApi = new WsApi(apiKey, {
+    // Subscribe once the connection is open
+    openCallback: () => {
+        wsApi.subscribe({
+            subscriptionId: "trackableId",
+            filter: {
+                query: and(
+                    text("bitcoin", {
+                        searchBody: false,
+                        searchHeadline: true,
+                        ignore: false
+                    }),
+                    text("scam", {
+                        searchBody: true,
+                        searchHeadline: false,
+                        ignore: true
+                    })
+                )            }
+        })
     },
-    callback: (news: News) => {
-        // Do anything with the filtered news
+    callback: (message: WebsocketResponse) => {
+        if (message.method === WebsocketMethod.SUBSCRIBE
+            && message.type === WebsocketResponseType.DATA) {
+            // Do anything with the filtered news
+        }
     }
 })
-```
+````
 

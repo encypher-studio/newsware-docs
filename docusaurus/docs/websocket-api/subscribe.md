@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Subscribe
@@ -11,20 +11,20 @@ The subscribe function is used to subscribe to news updates using the Websocket 
 It accepts the following arguments:
 
 ```typescript
-function subscribe(options: {
-    filter: Filter,
-    callback: (news: News[]) => void,
-    errorCallback?: (errorEvent: ErrorEvent) => void,
-    openCallback?: () => void,
-    closeCallback?: (closeEvent: CloseEvent) => void,
-    automaticReconnect?: boolean
-}) {
+function subscribe(
+    options: {
+        subscriptionId: string
+        filter: Filter
+    },
+    resubscribeOnReconnect: boolean = true
+) {
 ...
 }
 ```
 
 | Name               | Definition                                                                                    | Required |
 |--------------------|-----------------------------------------------------------------------------------------------|----------|
+| subscriptionId     | An id, the server will send messages related to the subscription using this id                | ✅        |
 | filter             | An object used to filter news, refer to [Filter](./filter)                                    | ✅        |
 | callback           | The filtered news will be passed to this callback                                             | ✅        |
 | errorCallback      | A callback to receive websocket errors                                                        |          |
@@ -37,29 +37,23 @@ function subscribe(options: {
 This subscription returns all unfiltered news and implements all callbacks:
 
 ````typescript
-import {Api, News} from "newsware"
-import {ErrorEvent, CloseEvent} from "ws";
+import {WebsocketResponse, WsApi} from "newsware";
 
-const api = new Api(apiKey)
-api.subscribe({
-    filter: {
-        // Add filters here
-    },
-    // On news received
-    callback: (news: News) => {
-        console.log(news)
-    },
-    // (Optional) On error
-    errorCallback: (error: ErrorEvent) => {
-        console.log("Websocket error: " + error.message)
-    },
-    // (Optional) On connection opened
+const wsApi = new WsApi(apiKey, {
+    // Subscribe once the connection is open
     openCallback: () => {
-        console.log("Connection established, waiting for news...")
+        wsApi.subscribe({
+            subscriptionId: "trackableId",
+            filter: {
+                // Add filters here
+            }
+        })
     },
-    // (Optional) On connection closed
-    closeCallback: (_: CloseEvent) => {
-        console.log("Connection closed")
+    callback: (message: WebsocketResponse) => {
+        if (message.method === WebsocketMethod.SUBSCRIBE
+            && message.type === WebsocketResponseType.DATA) {
+            // Do anything with the filtered news
+        }
     }
 })
 ````

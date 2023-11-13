@@ -10,39 +10,55 @@ Multiple queries can be joined with "and" and "or" conditions.
 
 Search all news containing "bitcoin" or "crypto" or "ethereum":
 
-```typescript
-import {text, News, Api, or} from "newsware";
+````typescript
+import {WebsocketResponse, WsApi, or, text} from "newsware";
 
-const api = new Api(apiKey)
-api.subscribe({
-    filter: {
-        query: or(
-            text("bitcoin"),
-            text("crypto"),
-            text("ethereum")
-        )
+const wsApi = new WsApi(apiKey, {
+    // Subscribe once the connection is open
+    openCallback: () => {
+        wsApi.subscribe({
+            subscriptionId: "trackableId",
+            filter: {
+                query: or(
+                    text("bitcoin"),
+                    text("crypto"),
+                    text("ethereum")
+                )
+            }
+        })
     },
-    callback: (news: News) => {
-        // Do anything with the filtered news
+    callback: (message: WebsocketResponse) => {
+        if (message.method === WebsocketMethod.SUBSCRIBE
+            && message.type === WebsocketResponseType.DATA) {
+            // Do anything with the filtered news
+        }
     }
 })
-```
+````
 
 Search all news containing "bitcoin" and "bull run":
 
-```typescript
-import {text, News, Api, and} from "newsware";
+````typescript
+import {WebsocketResponse, WsApi, and, text} from "newsware";
 
-const api = new Api(apiKey)
-api.subscribe({
-    filter: {
-        query: and(
-            text("bitcoin"),
-            text("bull run")
-        )
+const wsApi = new WsApi(apiKey, {
+    // Subscribe once the connection is open
+    openCallback: () => {
+        wsApi.subscribe({
+            subscriptionId: "trackableId",
+            filter: {
+                query: and(
+                    text("bitcoin"),
+                    text("bull run")
+                )
+            }
+        })
     },
-    callback: (news: News) => {
-        // Do anything with the filtered news
+    callback: (message: WebsocketResponse) => {
+        if (message.method === WebsocketMethod.SUBSCRIBE
+            && message.type === WebsocketResponseType.DATA) {
+            // Do anything with the filtered news
+        }
     }
 })
-```
+````

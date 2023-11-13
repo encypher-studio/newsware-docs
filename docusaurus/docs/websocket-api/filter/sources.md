@@ -13,7 +13,8 @@ export enum Source {
     GlobeNewswire = "PZ",
     PRNewswire = "PN",
     BusinessWire = "BW",
-    SEC = "SEC"
+    SEC = "SEC",
+    Hammerstone = "HS"
 }
 ```
 
@@ -21,17 +22,24 @@ export enum Source {
 
 This query will return all news from Dow Jones and Access Wire:
 
-```typescript
-import {Api, News, Source} from "newsware";
+````typescript
+import {WebsocketResponse, WsApi, Source} from "newsware";
 
-const api = new Api(apiKey)
-api.subscribe({
-    filter: {
-        sources: [Source.DowJones, Source.AccessWire]
+const wsApi = new WsApi(apiKey, {
+    // Subscribe once the connection is open
+    openCallback: () => {
+        wsApi.subscribe({
+            subscriptionId: "trackableId",
+            filter: {
+                sources: [Source.DowJones, Source.AccessWire]
+            }
+        })
     },
-    callback: (news: News) => {
-        // Do anything with the filtered news
+    callback: (message: WebsocketResponse) => {
+        if (message.method === WebsocketMethod.SUBSCRIBE
+            && message.type === WebsocketResponseType.DATA) {
+            // Do anything with the filtered news
+        }
     }
 })
-```
-
+````
