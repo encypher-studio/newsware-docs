@@ -359,3 +359,6 @@ components:
               type: string
               examples:
                 - Error message
+    NewsTimeLimit:
+      description: A UNIX timestamp. If set to 0 or less, the limit is not applied.
+      type: integer
