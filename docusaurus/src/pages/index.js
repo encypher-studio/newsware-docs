@@ -31,7 +31,7 @@ function HomepageHeader() {
           <div className={clsx('col col--4 margin-top--md')}>
             <Link
               className="button button--secondary button--lg"
-              to="https://bump.sh/encypher/doc/newsware-websocket-api">
+              to="pathname:///asyncapi">
               WebSocket Docs
             </Link>
           </div>

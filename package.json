@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/encypher-studio/newsware_clients_documentation#readme",
   "dependencies": {
+    "@asyncapi/cli": "^1.2.15",
     "http-server": "^14.1.1"
   }
 }
