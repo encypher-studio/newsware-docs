@@ -74,7 +74,7 @@ components:
               Id to identify subscription, the server messages related to this subscription will have the same id
             example: 4d921aca-6117-46eb-88ed-1cd9284dbb80
             type: string
-          payload:
+          value:
             $ref: '#/components/schemas/NewsFilter'
     UnsubscribeRequest:
       payload:
@@ -91,7 +91,7 @@ components:
               Id to identify the unsubscribe request
             example: d0df9941-dd7b-4b8c-8aa9-64367417a90c
             type: string
-          payload:
+          value:
             type: object
             properties:
               subscriptionId:
@@ -132,7 +132,7 @@ components:
           type:
             type: string
             const: error
-          payload:
+          value:
             type: object
             description: Contains the error
             properties:
@@ -154,7 +154,7 @@ components:
             type: string
             description: Id used when requesting the subscription
             example: 4d921aca-6117-46eb-88ed-1cd9284dbb80
-          payload:
+          value:
             type: array
             items:
               $ref: '#/components/schemas/News'
