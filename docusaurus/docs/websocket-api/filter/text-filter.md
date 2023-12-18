@@ -2,9 +2,10 @@
 sidebar_position: 2
 ---
 
-# Text query
+# Text filter
 
-A "text" query receives a text and optional options on where and how to look for it.
+A text filter is used to search for texts inside the headline and body of the news. An object with options can be passed
+alongside the values to search for.
 
 ## Definition
 
@@ -12,7 +13,6 @@ A "text" query receives a text and optional options on where and how to look for
 export interface TextOptions {
     onlyBody?: boolean
     onlyHeadline?: boolean
-    ignore?: boolean
 }
 ```
 
@@ -20,32 +20,27 @@ export interface TextOptions {
 |--------------|:---------------------------------------------------------------------------------------------------------------------------------------:|---------------|----------|
 | onlyHeadline |                                   If true, the text will be searched only in the headline of the news                                   | False         |          |
 | onlyBody     |                                     If true, the text will be searched only in the body of the news                                     | False         |          |
-| ignore       | Whether to ignore matches. For example, if you choose to ignore the text “bitcoin”, then no news that mention bitcoin will be received. | False         |          |
 
 ## Usage
 
-This query will retrieve headlines that mention "bitcoin", but ignore them if the body mentions "scam":
+This query will retrieve headlines that mention "bitcoin" OR "ethereum", but exclude them if the body mention "scam":
 
 ````typescript
-import {WebsocketResponse, WsApi, and, text} from "newsware";
+import {WebsocketResponse, WsApi, And, Text} from "newsware";
 
 const wsApi = new WsApi(apiKey, {
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
             subscriptionId: "trackableId",
-            filter: {
-                query: and(
-                    text("bitcoin", {
-                        onlyHeadline: true,
-                        ignore: false
-                    }),
-                    text("scam", {
-                        onlyBody: true,
-                        ignore: true
-                    })
-                )            
-            }
+            filter: And(
+                Text.any(["bitcoin", "ethereum"], {
+                    onlyHeadline: true
+                }),
+                Text.exclude(["scam"], {
+                    onlyBody: true
+                })
+            )
         })
     },
     callback: (message: WebsocketResponse) => {
