@@ -327,7 +327,7 @@ components:
           minimum: 1
           maximum: 10000
           default: 10
-        page:
+        cursor:
           description: Cursor describing the last result after which new items will be fetched. The cursor
             is returned in the previous request. If it is the first request, leave cursor blank.
           type: array
