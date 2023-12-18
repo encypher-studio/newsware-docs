@@ -41,16 +41,16 @@ export class WsApi {
 
 ## WebsocketResponse
 
-| Name    | Definition                                                                                                                           |
-|---------|--------------------------------------------------------------------------------------------------------------------------------------|
-| method  | Method the message belongs to, for subscripton it will be "subscription"                                                             |
-| type    | Type of message, can be "ok" to acknowledge a request, "error" to report an error, or "data" to deliver data in case of subscription |
-| id      | Id associated to the request. For subscriptions, it is the id used when subscribing.                                                 |
-| payload | The payload type depends on the method, for subscriptions it will be News[]                                                          |
+| Name   | Definition                                                                                                                           |
+|--------|--------------------------------------------------------------------------------------------------------------------------------------|
+| method | Method the message belongs to, for subscripton it will be "subscription"                                                             |
+| type   | Type of message, can be "ok" to acknowledge a request, "error" to report an error, or "data" to deliver data in case of subscription |
+| id     | Id associated to the request. For subscriptions, it is the id used when subscribing.                                                 |
+| value  | The value type depends on the method, for subscriptions it will be News[]                                                            |
 
 ## WebsocketErrorResponse
 
-It's a [WebsocketResponse](#WebsocketResponse) with a payload of type:
+It's a [WebsocketResponse](#WebsocketResponse) with a value of type:
 
 | Name    | Definition    |
 |---------|---------------|

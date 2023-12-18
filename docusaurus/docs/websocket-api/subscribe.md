@@ -22,15 +22,10 @@ function subscribe(
 }
 ```
 
-| Name               | Definition                                                                                    | Required |
-|--------------------|-----------------------------------------------------------------------------------------------|----------|
-| subscriptionId     | An id, the server will send messages related to the subscription using this id                | ✅        |
-| filter             | An object used to filter news, refer to [Filter](./filter)                                    | ✅        |
-| callback           | The filtered news will be passed to this callback                                             | ✅        |
-| errorCallback      | A callback to receive websocket errors                                                        |          |
-| openCallback       | A callback to be called when the websocket connection is established                          |          |
-| closeCallback      | A callback to be called if the websocket connection is closed                                 |          |
-| automaticReconnect | (Defaults to true) If true, it attempts to reconnect if the connection is closed unexpectedly |          |
+| Name               | Definition                                                                                                        | Required |
+|--------------------|-------------------------------------------------------------------------------------------------------------------|----------|
+| subscriptionId     | An id used to identify the subscription, the server will send messages related to this subscription using this id | ✅        |
+| filter             | An object used to filter news, refer to [Filter](./filter)                                                        | ✅        |
 
 # Usage
 
@@ -49,11 +44,24 @@ const wsApi = new WsApi(apiKey, {
             }
         })
     },
+    // Receive messages from the server
     callback: (message: WebsocketResponse) => {
         if (message.method === WebsocketMethod.SUBSCRIBE
             && message.type === WebsocketResponseType.DATA) {
             // Do anything with the filtered news
+            console.log(message.value)
         }
-    }
+    },
+    // (Optional) Throw errors and log to console
+    errorCallback: (message: WebsocketErrorResponse) => {
+        console.log("Websocket error: " + message.value.message)
+        throw Error(message.value.message)
+    },
+    // (Optional) Log when connection closes
+    closeCallback: (_: CloseEvent) => {
+        console.log("Connection closed")
+    },
+    // (Optional, default is true) If true, attempts to reconnect if connection is unexpectedly closed.
+    automaticReconnect: true,
 })
 ````
