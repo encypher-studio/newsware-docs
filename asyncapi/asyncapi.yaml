@@ -75,7 +75,7 @@ components:
             example: 4d921aca-6117-46eb-88ed-1cd9284dbb80
             type: string
           value:
-            $ref: '#/components/schemas/NewsFilter'
+            $ref: '#/components/schemas/SubscribeRequestValue'
     UnsubscribeRequest:
       payload:
         type: object
@@ -159,6 +159,18 @@ components:
             items:
               $ref: '#/components/schemas/News'
   schemas:
+    SubscribeRequestValue:
+      type: object
+      properties:
+        fields:
+          description: News fields to retrieve. Id is always added to all news items.
+          type: array
+          items:
+            $ref: '#/components/schemas/Field'
+          examples:
+            - ['body', 'headline']
+        filter:
+          $ref: '#/components/schemas/NewsFilter'
     News:
       type: object
       properties:
@@ -219,45 +231,12 @@ components:
     NewsFilter:
       description: |
         Used to filter news by different criteria.
-        This example will match if all are true:
-          - "bitcoin" or "ethereum" are mentioned in the headline
-          - "scam" is not mentioned in the body
-          - Metadata contains tickers "BTC" or "ETH"
-          - The source of the news is DownJones (DJ) or BusinessWire (BW)
-        ```json
-        {
-          "type": "and",
-          "value": [
-            {
-              "type": "text",
-              "action": "any",
-              "value": ["bitcoin", "ethereum"],
-              "onlyHeadline": true
-            },
-            {
-              "type": "text",
-              "action": "exclude",
-              "value": ["scam"],
-              "onlyBody": true
-            },
-            {
-              "type": "tickers",
-              "action": "any",
-              "value": ["BTC", "ETH"]
-            },
-            {
-              "type": "source",
-              "action": "any",
-              "value": ["DJ", "BW"]
-            }
-          ]
-        }
-        ```
       oneOf:
         - $ref: '#/components/schemas/TextQuery'
         - $ref: '#/components/schemas/ConditionQuery'
         - $ref: '#/components/schemas/MetadataQuery'
     ConditionQuery:
+      title: Condition filter
       type: object
       description: |
         Used to join multiple value using an AND or OR condition.
@@ -318,6 +297,7 @@ components:
               - $ref: '#/components/schemas/ConditionQuery'
               - $ref: '#/components/schemas/MetadataQuery'
     TextQuery:
+      title: Text filter
       type: object
       description: |
         Used to retrieve or exclude news containing various texts. If action is "all" a match will occur if all the texts are mentioned in the news, if "any" a match will occur if any of the items are mentioned, if "exclude" a match will
@@ -346,6 +326,7 @@ components:
           description: If true, the value will be searched only in the headline.
           example: false
     MetadataQuery:
+      title: Metadata filter
       type: object
       description: |
         Used to search by metadata. If action is "all" a match will occur if all the value items
@@ -387,3 +368,16 @@ components:
         - any
         - all
         - exclude
+    Field:
+      type: string
+      enum:
+        - headline
+        - body
+        - tickers
+        - source
+        - publicationTime
+        - receivedTime
+        - creationTime
+        - categoryCodes
+        - ciks
+        - link
