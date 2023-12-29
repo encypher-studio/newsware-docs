@@ -12,13 +12,14 @@ This subscription retrieves news from Dow Jones and SEC if any of the following 
 * Is a SEC filing with 1805719 OR 1557593 CIKs.
 
 ```typescript
-import {text, WsApi, Or, And, Source, WebsocketResponse, Sources, Text, Tickers, Ciks} from "newsware";
+import {text, WsApi, Or, And, Source, WebsocketResponse, Sources, Text, Tickers, Ciks, Field} from "newsware";
 
 const wsApi = new WsApi(apiKey, {
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
             subscriptionId: "trackableId",
+            fields: [Field.HEADLINE, Field.BODY], // Add extra fields to retrieve here
             filter: And(
                 Sources.any([Source.DowJones, Source.SEC]),
                 Or(

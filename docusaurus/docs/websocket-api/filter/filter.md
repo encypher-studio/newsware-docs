@@ -26,13 +26,14 @@ This subscription will return the news if any is true:
 * SEC filings with 1805719 or 1557593 CIKs.
 
 ````typescript
-import {WebsocketResponse, WsApi, And, Text, Ciks, Tickers} from "newsware";
+import {Field, WebsocketResponse, WsApi, And, Text, Ciks, Tickers} from "newsware";
 
 const wsApi = new WsApi(apiKey, {
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
             subscriptionId: "trackableId",
+            fields: [Field.HEADLINE, Field.BODY],
             filter: Or(
                 And(
                     Text.all(["bitcoin", "bull run"]),

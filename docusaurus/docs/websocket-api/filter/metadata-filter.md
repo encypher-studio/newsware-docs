@@ -16,13 +16,14 @@ This query will retrieve if ANY is true:
 * Has as Ciks 1805719 AND 1557593
 
 ````typescript
-import {WebsocketResponse, WsApi, Or, Tickers, Sources, CategoryCodes, Ciks} from "newsware";
+import {Field, WebsocketResponse, WsApi, Or, Tickers, Sources, CategoryCodes, Ciks} from "newsware";
 
 const wsApi = new WsApi(apiKey, {
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
             subscriptionId: "trackableId",
+            fields: [Field.HEADLINE, Field.BODY],
             filter: Or(
                 Tickers.all(["BTC", "ETH"]),
                 Sources.exclude(["DJ", "HS"]),

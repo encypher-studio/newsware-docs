@@ -26,13 +26,14 @@ export interface TextOptions {
 This query will retrieve headlines that mention "bitcoin" OR "ethereum", but exclude them if the body mention "scam":
 
 ````typescript
-import {WebsocketResponse, WsApi, And, Text} from "newsware";
+import {Field, WebsocketResponse, WsApi, And, Text} from "newsware";
 
 const wsApi = new WsApi(apiKey, {
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
             subscriptionId: "trackableId",
+            fields: [Field.HEADLINE, Field.BODY],
             filter: And(
                 Text.any(["bitcoin", "ethereum"], {
                     onlyHeadline: true
