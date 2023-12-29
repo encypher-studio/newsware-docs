@@ -14,13 +14,14 @@ Retrieve news that fulfill ANY of:
 * Has "BTC" as ticker.
 
 ````typescript
-import {WebsocketResponse, WsApi, Text, Or, Tickers} from "newsware";
+import {Field, WebsocketResponse, WsApi, Text, Or, Tickers} from "newsware";
 
 const wsApi = new WsApi(apiKey, {
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
             subscriptionId: "trackableId",
+            fields: [Field.HEADLINE, Field.BODY],
             filter: OrZ(
                 Text.any("bitcoin"),
                 Tickers.any(["BTC"]),
@@ -42,13 +43,14 @@ Retrieve news that fulfill ALL of:
 * Mentions "Satoshi Nakamoto" in the body.
 
 ````typescript
-import {WebsocketResponse, WsApi, And, Text} from "newsware";
+import {Field, WebsocketResponse, WsApi, And, Text} from "newsware";
 
 const wsApi = new WsApi(apiKey, {
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
             subscriptionId: "trackableId",
+            fields: [Field.HEADLINE, Field.BODY],
             filter: And(
                 Text.any("bitcoin", {onlyHeadline: true}),
                 Text.any("Satoshi Nakamoto", {onlyBody: true})
@@ -72,13 +74,14 @@ Retrieve news that fulfills ANY of:
 * Has "BTC" as ticker
 
 ````typescript
-import {WebsocketResponse, WsApi, And, Text, Or, Tickers} from "newsware";
+import {Field, WebsocketResponse, WsApi, And, Text, Or, Tickers} from "newsware";
 
 const wsApi = new WsApi(apiKey, {
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
             subscriptionId: "trackableId",
+            fields: [Field.HEADLINE, Field.BODY],
             filter: Or(
                 And(
                     Text.any("bitcoin"),
