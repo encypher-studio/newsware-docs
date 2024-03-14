@@ -3,7 +3,7 @@ name: Sync OpenAPI definition to ReadMe
 on:
   push:
     branches:
-      - main
+      - production
 jobs:
   sync:
     runs-on: ubuntu-latest
