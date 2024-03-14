@@ -16,7 +16,8 @@ Retrieve news that fulfill ANY of:
 ````typescript
 import {Field, WebsocketResponse, WsApi, Text, Or, Tickers} from "newsware";
 
-const wsApi = new WsApi(apiKey, {
+const wsApi = new WsApi({
+    apiKey: apiKey,
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
@@ -35,6 +36,7 @@ const wsApi = new WsApi(apiKey, {
         }
     }
 })
+wsApi.connect()
 ````
 
 Retrieve news that fulfill ALL of:
@@ -45,7 +47,8 @@ Retrieve news that fulfill ALL of:
 ````typescript
 import {Field, WebsocketResponse, WsApi, And, Text} from "newsware";
 
-const wsApi = new WsApi(apiKey, {
+const wsApi = new WsApi({
+    apiKey: apiKey,
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
@@ -76,7 +79,8 @@ Retrieve news that fulfills ANY of:
 ````typescript
 import {Field, WebsocketResponse, WsApi, And, Text, Or, Tickers} from "newsware";
 
-const wsApi = new WsApi(apiKey, {
+const wsApi = new WsApi({
+    apiKey: apiKey,
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({

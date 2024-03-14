@@ -16,10 +16,10 @@ export interface TextOptions {
 }
 ```
 
-| Field        |                                                               Definition                                                                | Default value | Required |
-|--------------|:---------------------------------------------------------------------------------------------------------------------------------------:|---------------|----------|
-| onlyHeadline |                                   If true, the text will be searched only in the headline of the news                                   | False         |          |
-| onlyBody     |                                     If true, the text will be searched only in the body of the news                                     | False         |          |
+| Field        |                             Definition                              | Default value | Required |
+| ------------ | :-----------------------------------------------------------------: | ------------- | -------- |
+| onlyHeadline | If true, the text will be searched only in the headline of the news | False         |          |
+| onlyBody     |   If true, the text will be searched only in the body of the news   | False         |          |
 
 ## Usage
 
@@ -28,7 +28,8 @@ This query will retrieve headlines that mention "bitcoin" OR "ethereum", but exc
 ````typescript
 import {Field, WebsocketResponse, WsApi, And, Text} from "newsware";
 
-const wsApi = new WsApi(apiKey, {
+const wsApi = new WsApi({
+    apiKey: apiKey,
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
@@ -51,5 +52,6 @@ const wsApi = new WsApi(apiKey, {
         }
     }
 })
+wsApi.connect()
 ````
 

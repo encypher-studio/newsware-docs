@@ -4,45 +4,52 @@ sidebar_position: 2
 
 # Connect
 
-To establish a connection to the websocket API, use the WsClient class.
+To establish a connection to the websocket API, first create a WsApi instance, and then call its connect() method.
 
 # Definition
 
-The constructor is defined as follows:
+The WsApi constructor is defined as follows:
 
 ```typescript
 export class WsApi {
 ...
 
     constructor(
-        private apikey: string,
         options: {
+            apiKey: string,
             callback: (response: WebsocketResponse) => void,
             errorCallback?: (error: WebsocketErrorResponse) => void,
             openCallback?: () => void,
-            closeCallback?: (closeEvent: CloseEvent) => void
+            closeCallback?: (closeEvent: CloseEvent) => void,
+            reconnect? boolean,
+            reconnectDelay?: number
         }
     ) { ...
     }
 
+    connect() {
+        ...
+    }
 ...
 }
 ```
 
-## Connect Options
+## WsApi Options
 
-| Name               | Definition                                                                                    | Required |
-|--------------------|-----------------------------------------------------------------------------------------------|----------|
-| callback           | The filtered news will be passed to this callback                                             | ✅        |
-| errorCallback      | A callback to receive websocket errors                                                        |          |
-| openCallback       | A callback to be called when the websocket connection is established                          |          |
-| closeCallback      | A callback to be called if the websocket connection is closed                                 |          |
-| automaticReconnect | (Defaults to true) If true, it attempts to reconnect if the connection is closed unexpectedly |          |
+| Name           | Definition                                                                                    | Required |
+| -------------- | --------------------------------------------------------------------------------------------- | -------- |
+| apiKey         | The api key to use for authenticating                                                         | ✅        |
+| callback       | The filtered news will be passed to this callback                                             | ✅        |
+| errorCallback  | A callback to receive websocket errors                                                        |          |
+| openCallback   | A callback to be called when the websocket connection is established                          |          |
+| closeCallback  | A callback to be called if the websocket connection is closed                                 |          |
+| reconnect      | (Defaults to true) If true, it attempts to reconnect if the connection is closed unexpectedly |          |
+| reconnectDelay | (Defaults to 1000) Milliseconds to wait before attempting a reconnect                         |          |
 
 ## WebsocketResponse
 
 | Name   | Definition                                                                                                                           |
-|--------|--------------------------------------------------------------------------------------------------------------------------------------|
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | method | Method the message belongs to, for subscripton it will be "subscription"                                                             |
 | type   | Type of message, can be "ok" to acknowledge a request, "error" to report an error, or "data" to deliver data in case of subscription |
 | id     | Id associated to the request. For subscriptions, it is the id used when subscribing.                                                 |
@@ -53,7 +60,7 @@ export class WsApi {
 It's a [WebsocketResponse](#WebsocketResponse) with a value of type:
 
 | Name    | Definition    |
-|---------|---------------|
+| ------- | ------------- |
 | message | Error message |
 
 # Usage

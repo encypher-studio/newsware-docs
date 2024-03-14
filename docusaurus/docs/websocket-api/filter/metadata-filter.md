@@ -18,7 +18,8 @@ This query will retrieve if ANY is true:
 ````typescript
 import {Field, WebsocketResponse, WsApi, Or, Tickers, Sources, CategoryCodes, Ciks} from "newsware";
 
-const wsApi = new WsApi(apiKey, {
+const wsApi = new WsApi({
+    apiKey: apiKey,
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
@@ -39,5 +40,6 @@ const wsApi = new WsApi(apiKey, {
         }
     }
 })
+wsApi.connect()
 ````
 
