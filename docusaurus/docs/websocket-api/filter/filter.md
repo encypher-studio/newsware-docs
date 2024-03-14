@@ -28,7 +28,8 @@ This subscription will return the news if any is true:
 ````typescript
 import {Field, WebsocketResponse, WsApi, And, Text, Ciks, Tickers} from "newsware";
 
-const wsApi = new WsApi(apiKey, {
+const wsApi = new WsApi({
+    apiKey: apiKey,
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
@@ -51,4 +52,5 @@ const wsApi = new WsApi(apiKey, {
         }
     }
 })
+wsApi.connect()
 ````

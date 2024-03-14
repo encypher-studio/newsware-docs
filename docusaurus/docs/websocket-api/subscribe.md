@@ -53,7 +53,8 @@ This subscription returns all unfiltered news and implements all callbacks:
 ````typescript
 import {WebsocketResponse, WsApi, Field} from "newsware";
 
-const wsApi = new WsApi(apiKey, {
+const wsApi = new WsApi({
+    apiKey: apiKey,
     // Subscribe once the connection is open
     openCallback: () => {
         wsApi.subscribe({
@@ -82,6 +83,9 @@ const wsApi = new WsApi(apiKey, {
         console.log("Connection closed")
     },
     // (Optional, default is true) If true, attempts to reconnect if connection is unexpectedly closed.
-    automaticReconnect: true,
+    reconnect: true,
+    // (Optional, default is 1000) Milliseconds to wait before attempting a reconnect.
+    reconnectDelay: 1000
 })
+wsApi.connect()
 ````
