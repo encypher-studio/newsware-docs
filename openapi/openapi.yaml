@@ -53,6 +53,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+  /news/{id}:
+    get:
+      summary: Get news by id
+      description: Returns a news item by id.
+      security:
+        - ApiKeyHeader: []
+        - ApiKeyQuery: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: News id
+          schema:
+            type: string
+      responses:
+        200:
+          description: A JSON news item.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/News"
+        403:
+          description: Api key was not set or is not associated to any user.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        404:
+          description: News not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   securitySchemes:
     ApiKeyHeader:
