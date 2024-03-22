@@ -155,9 +155,7 @@ components:
             description: Id used when requesting the subscription
             example: 4d921aca-6117-46eb-88ed-1cd9284dbb80
           value:
-            type: array
-            items:
-              $ref: "#/components/schemas/News"
+            $ref: "#/components/schemas/News"
   schemas:
     SubscribeRequestValue:
       type: object
