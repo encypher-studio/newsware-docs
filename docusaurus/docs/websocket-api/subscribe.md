@@ -25,7 +25,7 @@ function subscribe(
 | Name           | Definition                                                                                                        | Required |
 | -------------- | ----------------------------------------------------------------------------------------------------------------- | -------- |
 | subscriptionId | An id used to identify the subscription, the server will send messages related to this subscription using this id | ✅        |
-| fields         | A list of fields to retrieve from the news. Id is always returned. Refer to [Fields](./fieds)                     |          |
+| fields         | A list of fields to retrieve from the news. Id is always returned.                                                |          |
 | filter         | An object used to filter news, refer to [Filter](./filter)                                                        | ✅        |
 
 # Fields
