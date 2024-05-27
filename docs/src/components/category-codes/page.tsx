@@ -18,7 +18,9 @@ export default function CategoryCodes() {
         api.getSources().then(async sources => {
             const sourcesNew = []
             for (const source of sources) {
-                const categoryCodes = await api.getCategoryCodes(source.code)
+                let categoryCodes = await api.getCategoryCodes(source.code)
+                categoryCodes = categoryCodes.filter((categoryCode) => !categoryCode.code.includes(" "))
+
                 if (categoryCodes.length > 0) {
                     sourcesNew.push({ code: source.code, categoryCodes })
                 }
