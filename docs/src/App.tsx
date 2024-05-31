@@ -8,9 +8,11 @@ import { ServiceProvider } from "./lib/context/service";
 import { APP_ROUTES } from "./lib/routes/routes";
 import bash from 'react-syntax-highlighter/dist/esm/languages/hljs/bash';
 import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
+import ts from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
 
 SyntaxHighlighter.registerLanguage("bash", bash);
 SyntaxHighlighter.registerLanguage("javsacript", js);
+SyntaxHighlighter.registerLanguage("typescript", ts);
 
 function App() {
   return (

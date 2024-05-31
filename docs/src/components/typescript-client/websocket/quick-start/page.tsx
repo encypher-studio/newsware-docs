@@ -1,6 +1,5 @@
 import Code from "@/components/code/code";
 import Section from "@/components/section/section";
-import { List, ListItem } from 'https://shadcn-ui.veryfront.com/@components/Typography/List'
 
 export default function QuickStart() {
     return (
