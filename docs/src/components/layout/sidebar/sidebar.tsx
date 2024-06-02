@@ -2,10 +2,12 @@ import { APP_ROUTES, RouteOption } from "@/lib/routes/routes"
 import { Link, useLocation } from "react-router-dom"
 import path from "path"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { CaretSortIcon } from "@radix-ui/react-icons"
+import { CaretSortIcon, DoubleArrowLeftIcon, HamburgerMenuIcon } from "@radix-ui/react-icons"
+import { useState } from "react"
 
 export default function Sidebar() {
     const location = useLocation()
+    const [open, setOpen] = useState(true)
 
     const getOptions = (routes: { [path: string]: RouteOption }, prefixPath: string): React.ReactNode[] => {
         let indentation = prefixPath.split("/").length
@@ -47,18 +49,33 @@ export default function Sidebar() {
     }
 
     return (
-        <aside className="fixed z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block">
-            <div className="relative overflow-hidden h-full py-6 pr-6 lg:py-8">
-                <div className="h-full w-full rounded-[inherit]">
-                    <div className="min-width: 100%; display: table;">
-                        <div className="w-full">
-                            {
-                                getOptions(APP_ROUTES, "").map((node) => node)
-                            }
+        <>
+            <aside
+                className={" fixed z-30 h-[calc(100vh-3.5rem)] sticky"}
+            >
+                <HamburgerMenuIcon
+                    className={
+                        (open ? "hidden" : "block")
+                        + " absolute top-5 left-0 cursor-pointer"
+                    }
+                    onClick={() => setOpen(!open)}
+                />
+                <div className={
+                    (open ? "block" : "hidden")
+                    + " relative overflow-hidden h-full py-6 pr-6 lg:py-8"
+                }>
+                    <div className="h-full w-full rounded-[inherit]">
+                        <DoubleArrowLeftIcon className="absolute top-5 right-0 cursor-pointer" onClick={() => setOpen(!open)} />
+                        <div className="min-width: 100%; display: table;">
+                            <div className="w-full">
+                                {
+                                    getOptions(APP_ROUTES, "").map((node) => node)
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </aside>
+            </aside >
+        </>
     )
 }
