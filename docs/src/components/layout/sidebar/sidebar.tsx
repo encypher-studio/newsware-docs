@@ -54,7 +54,7 @@ export default function Sidebar() {
     return (
         <>
             <aside
-                className={" z-30 h-[calc(100vh-3.5rem)]"}
+                className={" top-0 sticky z-30 h-[calc(100vh-3.5rem)]"}
             >
                 <HamburgerMenuIcon
                     className={
@@ -65,7 +65,7 @@ export default function Sidebar() {
                 />
                 <div className={
                     (open ? "block" : "hidden")
-                    + " relative overflow-hidden h-full py-6 pr-6 lg:py-8"
+                    + " relative overflow-hidden h-full py-6 pr-6"
                 }>
                     <div className="h-full w-full rounded-[inherit]">
                         <DoubleArrowLeftIcon className="absolute top-5 right-0 cursor-pointer" onClick={() => setOpen(!open)} />
