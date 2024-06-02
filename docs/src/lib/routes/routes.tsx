@@ -3,6 +3,9 @@ import Installation from "@/components/typescript-client/installation/page"
 import Connect from "@/components/typescript-client/websocket/connect/page"
 import Considerations from "@/components/typescript-client/websocket/considerations/page"
 import Examples from "@/components/typescript-client/websocket/examples/page"
+import ConditionFilter from "@/components/typescript-client/websocket/filter/condition-filter/page"
+import MetadataFilter from "@/components/typescript-client/websocket/filter/metadata-filter/page"
+import TextFilter from "@/components/typescript-client/websocket/filter/text-filter/page"
 import QuickStart from "@/components/typescript-client/websocket/quick-start/page"
 import Subscribe from "@/components/typescript-client/websocket/subscribe/page"
 
@@ -12,16 +15,19 @@ export interface RouteOption {
     options?: {
         [path: string]: RouteOption
     }
+    targetBlank?: boolean
     forceExact?: boolean
 }
 
-export const APP_ROUTES: { [path: string]: RouteOption } = {
+export const APP_ROUTES = {
     "https://newsware.readme.io/": {
-        title: "REST API"
+        title: "REST API",
+        targetBlank: true
     },
     "asyncapi": {
         title: "Websocket API",
-        forceExact: true
+        forceExact: true,
+        targetBlank: true
     },
     "typescript-client": {
         title: "Typescript Client",
@@ -41,8 +47,22 @@ export const APP_ROUTES: { [path: string]: RouteOption } = {
                         title: "Connect",
                         component: <Connect />
                     },
-                    "unsubscribe": {
-                        title: "Unsubscribe"
+                    "filter": {
+                        title: "Filter",
+                        options: {
+                            "text": {
+                                title: "Text Filter",
+                                component: <TextFilter />
+                            },
+                            "metadata": {
+                                title: "Metadata Filter",
+                                component: <MetadataFilter />
+                            },
+                            "condition": {
+                                title: "Condition Filter",
+                                component: <ConditionFilter />
+                            }
+                        }
                     },
                     "subscribe": {
                         title: "Subscribe",

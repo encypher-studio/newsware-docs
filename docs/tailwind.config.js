@@ -7,6 +7,7 @@ module.exports = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
+  safelist: ["pl-1", "pl-2", "pl-3", "pl-3", "pl-4", "pl-5", "pl-6"],
   prefix: "",
   theme: {
     container: {
