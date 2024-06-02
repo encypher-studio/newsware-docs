@@ -34,7 +34,10 @@ export default function Sidebar() {
                             + (location.pathname.startsWith(path.join("/", prefixPath, optionPath)) ? "font-medium text-foreground" : "")
                             + " group flex w-full items-center rounded-md border border-transparent py-1 hover:underline"
                         }
-                        to={optionPath.startsWith("http") || option.component ? path.join(prefixPath, optionPath) : location.pathname}
+                        to={
+                            option.forceExact ? optionPath :
+                                optionPath.startsWith("http") || option.component ? path.join(prefixPath, optionPath) : location.pathname
+                        }
                         target={option.targetBlank ? "_blank" : ""}>
                         {option.title} {option.options ? <CaretSortIcon className="h-4 w-4" /> : <></>}
                     </Link>

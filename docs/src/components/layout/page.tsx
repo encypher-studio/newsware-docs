@@ -1,6 +1,6 @@
 import { APP_ROUTES, RouteOption } from "@/lib/routes/routes";
 import path from "path";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren } from "react";
 import { useLocation } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "../ui/breadcrumb";
 import Sidebar from "./sidebar/sidebar";

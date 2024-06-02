@@ -1,7 +1,6 @@
 import { DataTable } from "@/components/category-codes/data-table";
 import Code from "@/components/code/code";
 import Section from "@/components/section/section";
-import { APP_ROUTES } from "@/lib/routes/routes";
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
 import { Link } from "react-router-dom";

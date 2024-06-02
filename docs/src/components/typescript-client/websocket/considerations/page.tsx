@@ -1,4 +1,3 @@
-import Code from "@/components/code/code";
 import Section from "@/components/section/section";
 
 export default function Considerations() {

@@ -1,5 +1,3 @@
-import { DataTable } from "@/components/category-codes/data-table";
-import Code from "@/components/code/code";
 import Section from "@/components/section/section";
 import { Link } from "react-router-dom";
 

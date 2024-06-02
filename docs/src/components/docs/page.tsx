@@ -1,12 +1,9 @@
-import { PropsWithChildren } from "react";
 import Section from "../section/section";
 
-export default function Docs({ children }: PropsWithChildren) {
+export default function Docs() {
     return (
-        <>
-            <Section title="Newsware Docs">
-                <p>Documentation for Newsware API and clients.</p>
-            </Section>
-        </>
+        <Section title="Newsware Docs">
+            <p>Documentation for Newsware API and clients.</p>
+        </Section>
     )
 }
