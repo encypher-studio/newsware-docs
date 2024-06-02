@@ -54,7 +54,7 @@ export default function Sidebar() {
     return (
         <>
             <aside
-                className={" fixed z-30 h-[calc(100vh-3.5rem)] sticky"}
+                className={" z-30 h-[calc(100vh-3.5rem)]"}
             >
                 <HamburgerMenuIcon
                     className={

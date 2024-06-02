@@ -48,7 +48,7 @@ export default function Layout({ children }: PropsWithChildren) {
     return (
         <div className="px-6 items-start grid gap-6 lg:gap-10 grid-cols-[auto_1fr]">
             <Sidebar />
-            <main className="relative py-6">
+            <main className="py-6 overflow-hidden">
                 <div className="mx-auto w-full min-w-0">
                     <Breadcrumb className="mb-4">
                         <BreadcrumbList>
