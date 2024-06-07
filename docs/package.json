@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "export VITE_ENV=staging && vite",
     "build:staging": "export VITE_ENV=staging && tsc && vite build",
-    "build": "export VITE_ENV=production && tsc && vite build",
+    "build:production": "export VITE_ENV=production && tsc && vite build",
+    "build:": "pnpm build:production",
+    "build": "pnpm build:production",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
