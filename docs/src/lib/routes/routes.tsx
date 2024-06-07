@@ -1,4 +1,5 @@
 import CategoryCodes from "@/components/category-codes/page"
+import Sources from "@/components/sources/page"
 import Installation from "@/components/typescript-client/installation/page"
 import Connect from "@/components/typescript-client/websocket/connect/page"
 import Considerations from "@/components/typescript-client/websocket/considerations/page"
@@ -84,4 +85,8 @@ export const APP_ROUTES = {
         title: "Category Codes",
         component: <CategoryCodes />
     },
+    "sources": {
+        title: "Sources",
+        component: <Sources />
+    }
 }

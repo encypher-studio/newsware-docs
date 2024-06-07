@@ -30,8 +30,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       newsware:
-        specifier: 10.0.0-beta.17
-        version: 10.0.0-beta.17(ws@8.17.0)
+        specifier: 10.0.0-beta.18
+        version: 10.0.0-beta.18(ws@8.17.0)
       path-browserify:
         specifier: ^1.0.1
         version: 1.0.1
@@ -1224,8 +1224,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  newsware@10.0.0-beta.17:
-    resolution: {integrity: sha512-U3uyBOlOEOvqvvq/oh33oI8iTyUbqkSmliORb1NNx0V6Iz+7u1kDnPdPfCsW3Gfk4MFYkrAvWtgHnnGRODrSWQ==}
+  newsware@10.0.0-beta.18:
+    resolution: {integrity: sha512-9e5CwK7DQ+XZXWse00PvhMzOFRB2RSD6l38/tFZh60vDHmJ5w9WGz2s6pbylMoBTuy6mCvf3opMNxtKTUIv9qg==}
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -2693,7 +2693,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  newsware@10.0.0-beta.17(ws@8.17.0):
+  newsware@10.0.0-beta.18(ws@8.17.0):
     dependencies:
       isomorphic-fetch: 3.0.0
       isomorphic-ws: 5.0.0(ws@8.17.0)

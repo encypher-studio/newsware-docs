@@ -24,7 +24,6 @@ export default function Sidebar() {
                 content.push(...getOptions(option.options, path.join(prefixPath, optionPath)))
             }
 
-            console.log(location.pathname, path.join("/", prefixPath, optionPath), location.pathname === path.join("/", prefixPath, optionPath))
             nodes.push(<Collapsible key={option.title} className="grid grid-flow-row auto-rows-max text-sm" defaultOpen={location.pathname.startsWith(path.join("/", prefixPath, optionPath))}>
                 <CollapsibleTrigger asChild>
                     <Link
