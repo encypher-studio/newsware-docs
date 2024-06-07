@@ -6,7 +6,7 @@ rm -rf build
   cd ./docs
   npm i -g pnpm
   pnpm install
-  pnpm run build
+  pnpm build:$1
 )
 
 cp -r ./docs/dist ./build
