@@ -6,12 +6,12 @@ export default function ConditionFilter() {
         <>
             <Section title="Condition filter" >
                 <p>
-                    A condition filter can be used to create complex filters involving "Or" and "And" conditions.
+                    A condition filter can be used to create complex filters involving "Or", "And" and "And Not" conditions.
                 </p>
             </Section>
             <Section title="Definition">
                 <Code language="typescript">
-                    {`export function And/Or(...queries: Filter[]): Filter {
+                    {`export function And/AndNot/Or(...queries: Filter[]): Filter {
     ...
 }`}
                 </Code>
@@ -56,7 +56,7 @@ wsApi.connect()`}
                 </Code>
 
                 <p className="pt-6">
-                    Retrieve news that fulfill ALL of::
+                    Retrieve news that fulfill ALL of:
 
                     <ul className="mt-6 ml-6 list-disc">
                         <li>
@@ -80,6 +80,43 @@ const wsApi = new WsApi({
             filter: And(
                 Text.any("bitcoin", {onlyHeadline: true}),
                 Text.any("Satoshi Nakamoto", {onlyBody: true})
+            )
+        })
+    },
+    callback: (message: WebsocketResponse) => {
+        if (message.method === WebsocketMethod.SUBSCRIBE
+            && message.type === WebsocketResponseType.DATA) {
+            // Do anything with the filtered news
+        }
+    }
+})`}
+                </Code>
+
+                <p className="pt-6">
+                    Retrieve news that fulfill ALL of:
+
+                    <ul className="mt-6 ml-6 list-disc">
+                        <li>
+                            Don't mention "bitcoin" in the headline.
+                        </li>
+                        <li>
+                            Don't have "BTC" as ticker.
+                        </li>
+                    </ul>
+                </p>
+                <Code language="typescript">
+                    {`import {Field, WebsocketResponse, WsApi, AndNot, Text} from "newsware";
+
+const wsApi = new WsApi({
+    apiKey: apiKey,
+    // Subscribe once the connection is open
+    openCallback: () => {
+        wsApi.subscribe({
+            subscriptionId: "trackableId",
+            fields: [Field.HEADLINE, Field.BODY],
+            filter: AndNot(
+                Text.any("bitcoin", {onlyHeadline: true}),
+                Tickers.any(["BTC"])
             )
         })
     },

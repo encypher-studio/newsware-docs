@@ -237,7 +237,7 @@ components:
       title: Condition filter
       type: object
       description: |
-        Used to join multiple value using an AND or OR condition.
+        Used to join multiple value using an AND, AND NOT or OR condition.
 
         Example, search for news that contains "bitcoin" or "ethereum" in the headline AND don't contain "scam" in the body:
         ```json
@@ -282,11 +282,31 @@ components:
             }
           ]
         }
+
+        Example, search for news that fulfill all of the following:
+          - Don't mention "bitcoin"
+          - Don't have "BTC" as ticker.
+        ```json
+        {
+          "type": "andNot",
+          "value": [
+            {
+                "type": "text",
+                "action": "any",
+                "value": ["bitcoin"]
+            },
+            { 
+              "type": "ticker",
+              "action": "any",
+              "value": ["BTC"]
+            }
+          ]
+        }
         ```
       properties:
         type:
           type: string
-          enum: ["and", "or"]
+          enum: ["and", "or", "andNot"]
         value:
           type: array
           items:
