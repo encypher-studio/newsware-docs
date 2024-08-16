@@ -19,7 +19,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewsFilter'
+              $ref: "#/components/schemas/NewsFilter"
       responses:
         200:
           description: A JSON page of news.
@@ -50,10 +50,10 @@ paths:
                       items:
                         type: string
                       description: A list of tickers related to the news
-                      example: [ APPL, HSBC ]
+                      example: [APPL, HSBC]
                     source:
                       description: Source of the news
-                      $ref: '#/components/schemas/Source'
+                      $ref: "#/components/schemas/Source"
                       example: SEC
                     publicationTime:
                       type: string
@@ -72,7 +72,7 @@ paths:
                       items:
                         type: integer
                       description: (Only valid for SEC filings) CIKs associated to the SEC filing
-                      example: [ 1375793, 1692705 ]
+                      example: [1375793, 1692705]
                     link:
                       type: string
                       description: (Only valid for SEC filings) Official SEC link to filing
@@ -96,7 +96,7 @@ components:
     NewsFilter:
       description: |
         Used to filter news by publication time, tickers and a query.
-        
+
         Example:
         ```json
         {
@@ -116,13 +116,13 @@ components:
         ```
       properties:
         pagination:
-          $ref: '#/components/schemas/NewsPagination'
+          $ref: "#/components/schemas/NewsPagination"
         publishedBefore:
           description: UNIX timestamp. Blank or less than 1 to ignore.
-          $ref: '#/components/schemas/NewsTimeLimit'
+          $ref: "#/components/schemas/NewsTimeLimit"
         publishedAfter:
           description: UNIX timestamp. Blank or less than 1 to ignore.
-          $ref: '#/components/schemas/NewsTimeLimit'
+          $ref: "#/components/schemas/NewsTimeLimit"
         tickers:
           description: A list of tickers. If the ticker exists in the news, it will be fetched.
           type: array
@@ -135,13 +135,13 @@ components:
             type: integer
         query:
           oneOf:
-            - $ref: '#/components/schemas/TextQuery'
-            - $ref: '#/components/schemas/ConditionQuery'
+            - $ref: "#/components/schemas/TextQuery"
+            - $ref: "#/components/schemas/ConditionQuery"
         sources:
           description: A list of sources. Only news from theses sources will be fetched. If empty, all sources are fetched.
           type: array
           items:
-            $ref: '#/components/schemas/Source'
+            $ref: "#/components/schemas/Source"
       example:
         query:
           and:
@@ -212,8 +212,8 @@ components:
           ]
         }
         ```
-        
-        
+
+
         Example, search for news that fulfill one of the following:
           - Mention "bitcoin" AND "bull run" in the headline
           - Mention "dollar", in the headline
@@ -250,8 +250,8 @@ components:
           type: array
           items:
             oneOf:
-              - $ref: '#/components/schemas/TextQuery'
-              - $ref: '#/components/schemas/ConditionQuery'
+              - $ref: "#/components/schemas/TextQuery"
+              - $ref: "#/components/schemas/ConditionQuery"
     TextQuery:
       type: object
       description: |
