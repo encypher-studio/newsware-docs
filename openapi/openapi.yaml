@@ -184,18 +184,18 @@ components:
             ]
           },
           "pagination": {"limit": 10, "cursor": [12321213213, 423]},
-          "publishedBefore": 1695102611,
-          "publishedAfter": 0
+          "publishedBefore": 1723831041,
+          "publishedAfter": 1723830000
         }
         ```
       properties:
         pagination:
           $ref: "#/components/schemas/NewsPagination"
         publishedBefore:
-          description: UNIX timestamp. Blank or less than 1 to ignore.
+          description: UNIX timestamp in seconds. Blank or less than 1 to ignore.
           $ref: "#/components/schemas/NewsTimeLimit"
         publishedAfter:
-          description: UNIX timestamp. Blank or less than 1 to ignore.
+          description: UNIX timestamp in seconds. Blank or less than 1 to ignore.
           $ref: "#/components/schemas/NewsTimeLimit"
         fields:
           description: News fields to retrieve. Id is always added to all news items.
