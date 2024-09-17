@@ -1,36 +1,30 @@
-import Code from "@/components/code/code";
-import Section from "@/components/section/section";
+import { Code, Section } from "@newsware/ui";
 
-export default function ConditionFilter() {
-    return (
-        <>
-            <Section title="Condition filter" >
-                <p>
-                    A condition filter can be used to create complex filters involving "Or", "And" and "And Not" conditions.
-                </p>
-            </Section>
-            <Section title="Definition">
-                <Code language="typescript">
-                    {`export function And/AndNot/Or(...queries: Filter[]): Filter {
+export const ConditionFilter = () => {
+  return (
+    <>
+      <Section title="Condition filter">
+        <p>
+          A condition filter can be used to create complex filters involving
+          "Or", "And" and "And Not" conditions.
+        </p>
+      </Section>
+      <Section title="Definition">
+        <Code language="typescript">
+          {`export function And/AndNot/Or(...queries: Filter[]): Filter {
     ...
 }`}
-                </Code>
-            </Section>
-            <Section title="Usage">
-                <p>
-                    Retrieve news that fulfill ANY of:
-
-                    <ul className="mt-6 ml-6 list-disc">
-                        <li>
-                            Mention "bitcoin".
-                        </li>
-                        <li>
-                            Has "BTC" as ticker.
-                        </li>
-                    </ul>
-                </p>
-                <Code language="typescript">
-                    {`import {Field, WebsocketResponse, WsApi, Text, Or, Tickers} from "newsware";
+        </Code>
+      </Section>
+      <Section title="Usage">
+        <div className="grid gap-2">
+          <p>Retrieve news that fulfill ANY of:</p>
+          <ul className="ml-6 list-disc">
+            <li>Mention "bitcoin".</li>
+            <li>Has "BTC" as ticker.</li>
+          </ul>
+          <Code language="typescript">
+            {`import {Field, WebsocketResponse, WsApi, Text, Or, Tickers} from "newsware";
 
 const wsApi = new WsApi({
     apiKey: apiKey,
@@ -53,22 +47,15 @@ const wsApi = new WsApi({
     }
 })
 wsApi.connect()`}
-                </Code>
+          </Code>
 
-                <p className="pt-6">
-                    Retrieve news that fulfill ALL of:
-
-                    <ul className="mt-6 ml-6 list-disc">
-                        <li>
-                            Mentions "bitcoin" in the headline.
-                        </li>
-                        <li>
-                            Mentions "Satoshi Nakamoto" in the body.
-                        </li>
-                    </ul>
-                </p>
-                <Code language="typescript">
-                    {`import {Field, WebsocketResponse, WsApi, And, Text} from "newsware";
+          <p>Retrieve news that fulfill ALL of:</p>
+          <ul className="ml-6 list-disc">
+            <li>Mentions "bitcoin" in the headline.</li>
+            <li>Mentions "Satoshi Nakamoto" in the body.</li>
+          </ul>
+          <Code language="typescript">
+            {`import {Field, WebsocketResponse, WsApi, And, Text} from "newsware";
 
 const wsApi = new WsApi({
     apiKey: apiKey,
@@ -90,22 +77,15 @@ const wsApi = new WsApi({
         }
     }
 })`}
-                </Code>
+          </Code>
 
-                <p className="pt-6">
-                    Retrieve news that fulfill ALL of:
-
-                    <ul className="mt-6 ml-6 list-disc">
-                        <li>
-                            Don't mention "bitcoin" in the headline.
-                        </li>
-                        <li>
-                            Don't have "BTC" as ticker.
-                        </li>
-                    </ul>
-                </p>
-                <Code language="typescript">
-                    {`import {Field, WebsocketResponse, WsApi, AndNot, Text} from "newsware";
+          <p>Retrieve news that fulfill ALL of:</p>
+          <ul className="ml-6 list-disc">
+            <li>Don't mention "bitcoin" in the headline.</li>
+            <li>Don't have "BTC" as ticker.</li>
+          </ul>
+          <Code language="typescript">
+            {`import {Field, WebsocketResponse, WsApi, AndNot, Text} from "newsware";
 
 const wsApi = new WsApi({
     apiKey: apiKey,
@@ -127,23 +107,18 @@ const wsApi = new WsApi({
         }
     }
 })`}
-                </Code>
-            </Section>
-            <Section title="Usage: Nested conditions">
-                <p>
-                    Retrieve news that fulfill ANY of:
-
-                    <ul className="mt-6 ml-6 list-disc">
-                        <li>
-                            Mentions "bitcoin" AND NOT mentions "scam"
-                        </li>
-                        <li>
-                            Has "BTC" as ticker
-                        </li>
-                    </ul>
-                </p>
-                <Code language="typescript">
-                    {`import {Field, WebsocketResponse, WsApi, And, Text, Or, Tickers} from "newsware";
+          </Code>
+        </div>
+      </Section>
+      <Section title="Usage: Nested conditions">
+        <div className="grid gap-2">
+          <p>Retrieve news that fulfill ANY of:</p>
+          <ul className="ml-6 list-disc">
+            <li>Mentions "bitcoin" AND NOT mentions "scam"</li>
+            <li>Has "BTC" as ticker</li>
+          </ul>
+          <Code language="typescript">
+            {`import {Field, WebsocketResponse, WsApi, And, Text, Or, Tickers} from "newsware";
 
 const wsApi = new WsApi({
     apiKey: apiKey,
@@ -168,8 +143,9 @@ const wsApi = new WsApi({
         }
     }
 })`}
-                </Code>
-            </Section>
-        </>
-    )
-}
+          </Code>
+        </div>
+      </Section>
+    </>
+  );
+};

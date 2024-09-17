@@ -1,34 +1,35 @@
-import { DataTable } from "@/components/category-codes/data-table";
-import Code from "@/components/code/code";
-import Section from "@/components/section/section";
 import { FieldDefinitionColumn, fieldDefinitionColumn } from "@/lib/types";
+import { Code, DataTable, Section } from "@newsware/ui";
 import { actionTable } from "../../common";
 
-
 const textOptions: FieldDefinitionColumn[] = [
-    {
-        name: "onlyHeadline",
-        definition: "(Default: false) If true, the text will be searched only in the headline of the news.",
-        required: false
-    },
-    {
-        name: "onlyBody",
-        definition: "(Default: false) If true, the text will be searched only in the body of the news.",
-        required: false
-    },
-]
+  {
+    name: "onlyHeadline",
+    definition:
+      "(Default: false) If true, the text will be searched only in the headline of the news.",
+    required: false,
+  },
+  {
+    name: "onlyBody",
+    definition:
+      "(Default: false) If true, the text will be searched only in the body of the news.",
+    required: false,
+  },
+];
 
-export default function TextFilter() {
-    return (
-        <>
-            <Section title="Text filter" >
-                <p>
-                    A text filter is used to search for texts inside the headline and body of the news. An object with options can be passed alongside the values to search for.
-                </p>
-            </Section>
-            <Section title="Definition">
-                <Code language="typescript">
-                    {`export class Text {
+export const TextFilter = () => {
+  return (
+    <>
+      <Section title="Text filter">
+        <p>
+          A text filter is used to search for texts inside the headline and body
+          of the news. An object with options can be passed alongside the values
+          to search for.
+        </p>
+      </Section>
+      <Section title="Definition">
+        <Code language="typescript">
+          {`export class Text {
     constructor() {
     }
 
@@ -44,23 +45,20 @@ export default function TextFilter() {
         ...
     }
 }`}
-                </Code>
-            </Section>
-            <Section title="Methods">
-                {actionTable()}
-            </Section>
-            <Section title="TextOptions">
-                <DataTable
-                    columns={fieldDefinitionColumn}
-                    data={textOptions}
-                />
-            </Section>
-            <Section title="Usage">
-                <p>
-                    This query will retrieve headlines that mention "bitcoin" OR "ethereum", but exclude them if the body mentions "scam":
-                </p>
-                <Code language="typescript">
-                    {`import {Field, WebsocketResponse, WsApi, And, Text} from "newsware";
+        </Code>
+      </Section>
+      <Section title="Methods">{actionTable()}</Section>
+      <Section title="TextOptions">
+        <DataTable columns={fieldDefinitionColumn} data={textOptions} />
+      </Section>
+      <Section title="Usage">
+        <div className="grid gap-2">
+          <p>
+            This query will retrieve headlines that mention "bitcoin" OR
+            "ethereum", but exclude them if the body mentions "scam":
+          </p>
+          <Code language="typescript">
+            {`import {Field, WebsocketResponse, WsApi, And, Text} from "newsware";
 
 const wsApi = new WsApi({
     apiKey: apiKey,
@@ -87,8 +85,9 @@ const wsApi = new WsApi({
     }
 })
 wsApi.connect()`}
-                </Code>
-            </Section>
-        </>
-    )
-}
+          </Code>
+        </div>
+      </Section>
+    </>
+  );
+};

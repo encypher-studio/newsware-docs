@@ -1,9 +1,9 @@
-import Section from "../section/section";
+import { Section } from "@newsware/ui";
 
-export default function Docs() {
-    return (
-        <Section title="Newsware Docs">
-            <p>Documentation for Newsware API and clients.</p>
-        </Section>
-    )
-}
+export const Docs = () => {
+  return (
+    <Section title="Newsware Docs">
+      <p>Documentation for Newsware API and clients.</p>
+    </Section>
+  );
+};

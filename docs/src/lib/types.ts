@@ -1,4 +1,4 @@
-import { ColumnDef } from "@tanstack/react-table"
+import { ColumnDef } from "@newsware/ui"
 
 export interface FieldDefinitionColumn {
     name: string

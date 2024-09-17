@@ -1,19 +1,17 @@
-import Code from "@/components/code/code";
-import Section from "@/components/section/section";
-import { atomOneDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { Code, Section } from "@newsware/ui";
 
-export default function Installation() {
-    return (
-        <>
-            <Section title="Installation">
-                <p>Get started by installing the Newsware client</p>
-                <Code language="" style={atomOneDark}>
-                    npm install newsware
-                </Code>
-            </Section>
-            <Section title="Compatibility">
-                <p>The client is compatible for browser and Node applications</p>
-            </Section>
-        </>
-    )
-}
+export const Installation = () => {
+  return (
+    <>
+      <Section title="Installation">
+        <div className="grid gap-2">
+          <p>Get started by installing the Newsware client</p>
+          <Code language="bash">npm install newsware</Code>
+        </div>
+      </Section>
+      <Section title="Compatibility">
+        <p>The client is compatible for browser and Node applications</p>
+      </Section>
+    </>
+  );
+};

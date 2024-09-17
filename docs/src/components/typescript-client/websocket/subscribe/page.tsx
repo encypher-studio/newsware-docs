@@ -1,64 +1,73 @@
-import { DataTable } from "@/components/category-codes/data-table";
-import Code from "@/components/code/code";
-import Section from "@/components/section/section";
-import { ColumnDef } from "@tanstack/react-table";
+import { Code, ColumnDef, DataTable, Section } from "@newsware/ui";
 import React from "react";
 import { Link } from "react-router-dom";
 
 interface SubscribeArguments {
-    name: string
-    definition: string | React.ReactNode
-    required: boolean
+  name: string;
+  definition: string | React.ReactNode;
+  required: boolean;
 }
 
 const wsSubscribeArguments: ColumnDef<SubscribeArguments>[] = [
-    {
-        accessorKey: "name",
-        header: "Name",
+  {
+    accessorKey: "name",
+    header: "Name",
+  },
+  {
+    accessorKey: "definition",
+    header: "Definition",
+    cell: ({ row }) => {
+      return row.getValue("definition");
     },
-    {
-        accessorKey: "definition",
-        header: "Definition",
-        cell: ({ row }) => {
-            return row.getValue("definition")
-        },
-    },
-    {
-        accessorKey: "required",
-        header: "Required",
-        accessorFn: (row: SubscribeArguments) => row.required ? '\u2705' : "",
-    },
-]
+  },
+  {
+    accessorKey: "required",
+    header: "Required",
+    accessorFn: (row: SubscribeArguments) => (row.required ? "\u2705" : ""),
+  },
+];
 
 const subscribeArguments: SubscribeArguments[] = [
-    {
-        name: "subscriptionId",
-        definition: "The ID of the subscription. The responses will have this same ID to match the request with the response.",
-        required: true
-    },
-    {
-        name: "fields",
-        definition: "A list of fields to retrieve from the news. Id is always returned.",
-        required: true
-    },
-    {
-        name: "filter",
-        definition: <div>An object used to filter news, refer to <Link to="/typescript-client/websocket/filter" className="text-accent">Filter</Link>.</div>,
-        required: false
-    }
-]
+  {
+    name: "subscriptionId",
+    definition:
+      "The ID of the subscription. The responses will have this same ID to match the request with the response.",
+    required: true,
+  },
+  {
+    name: "fields",
+    definition:
+      "A list of fields to retrieve from the news. Id is always returned.",
+    required: true,
+  },
+  {
+    name: "filter",
+    definition: (
+      <div>
+        An object used to filter news, refer to{" "}
+        <Link to="/typescript-client/websocket/filter" className="text-accent">
+          Filter
+        </Link>
+        .
+      </div>
+    ),
+    required: false,
+  },
+];
 
-export default function Subscribe() {
-    return (
-        <>
-            <Section title="Subscribe" >
-                <p>
-                    The subscribe function is used to subscribe to news updates using the Websocket API.
-                </p>
-            </Section>
-            <Section title="Definition">
-                <Code language="typescript">
-                    {`function subscribe(
+export const Subscribe = () => {
+  return (
+    <>
+      <Section title="Subscribe">
+        <p>
+          The subscribe function is used to subscribe to news updates using the
+          Websocket API.
+        </p>
+      </Section>
+      <Section title="Definition">
+        <div className="grid gap-2">
+          <Code language="typescript">
+            {`function subscribe(
     options: {
         subscriptionId: string
         filter: Filter
@@ -67,16 +76,15 @@ export default function Subscribe() {
 ) {
 ...
 }`}
-                </Code>
-                <div className="pb-6"></div>
-                <DataTable columns={wsSubscribeArguments} data={subscribeArguments} />
-            </Section>
-            <Section title="Fields">
-                <p>
-                    The available fields are:
-                </p>
-                <Code language="typescript">
-                    {`export enum Field {
+          </Code>
+          <DataTable columns={wsSubscribeArguments} data={subscribeArguments} />
+        </div>
+      </Section>
+      <Section title="Fields">
+        <div className="grid gap-2">
+          <p>The available fields are:</p>
+          <Code language="typescript">
+            {`export enum Field {
     HEADLINE = "headline",
     BODY = "body",
     TICKERS = "tickers",
@@ -88,14 +96,17 @@ export default function Subscribe() {
     CIKS = "ciks",
     LINK = "link"
 }`}
-                </Code>
-            </Section>
-            <Section title="Usage">
-                <p>
-                    This subscription returns all unfiltered news and implements all callbacks:
-                </p>
-                <Code language="typescript">
-                    {`import {WebsocketResponse, WsApi, Field} from "newsware";
+          </Code>
+        </div>
+      </Section>
+      <Section title="Usage">
+        <div className="grid gap-2">
+          <p>
+            This subscription returns all unfiltered news and implements all
+            callbacks:
+          </p>
+          <Code language="typescript">
+            {`import {WebsocketResponse, WsApi, Field} from "newsware";
 
 const wsApi = new WsApi({
     apiKey: apiKey,
@@ -132,8 +143,9 @@ const wsApi = new WsApi({
     reconnectDelay: 1000
 })
 wsApi.connect()`}
-                </Code>
-            </Section>
-        </>
-    )
-}
+          </Code>
+        </div>
+      </Section>
+    </>
+  );
+};

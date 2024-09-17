@@ -1,29 +1,22 @@
-import Code from "@/components/code/code";
-import Section from "@/components/section/section";
+import { Code, Section } from "@newsware/ui";
 
-export default function QuickStart() {
-    return (
-        <>
-            <Section title="Quick start">
-                <p>
-                    This subscription retrieves news from Dow Jones and SEC if any of the following is true:
-                </p>
-                <ul className="mt-6 ml-6 list-disc">
-                    <li>
-                        Mentions "bitcoin".
-                    </li>
-                    <li>
-                        Mentions "dogecoin" AND NOT "elon musk".
-                    </li>
-                    <li>
-                        Has "BTC" OR "XRP" as tickers.
-                    </li>
-                    <li>
-                        Is a SEC filing with 1805719 OR 1557593 CIKs.
-                    </li>
-                </ul>
-                <Code language="javascript">
-                    {`import {text, WsApi, Or, And, Source, WebsocketResponse, Sources, Text, Tickers, Ciks, Field} from "newsware";
+export const QuickStart = () => {
+  return (
+    <>
+      <Section title="Quick start">
+        <div className="grid gap-2">
+          <p>
+            This subscription retrieves news from Dow Jones and SEC if any of
+            the following is true:
+          </p>
+          <ul className="ml-6 list-disc">
+            <li>Mentions "bitcoin".</li>
+            <li>Mentions "dogecoin" AND NOT "elon musk".</li>
+            <li>Has "BTC" OR "XRP" as tickers.</li>
+            <li>Is a SEC filing with 1805719 OR 1557593 CIKs.</li>
+          </ul>
+          <Code language="javascript">
+            {`import {text, WsApi, Or, And, Source, WebsocketResponse, Sources, Text, Tickers, Ciks, Field} from "newsware";
 
 const wsApi = new WsApi({
     apiKey: apiKey,
@@ -69,8 +62,9 @@ const wsApi = new WsApi({
     reconnectDelay: 1000
 })
 wsApi.connect()`}
-                </Code>
-            </Section>
-        </>
-    )
-}
+          </Code>
+        </div>
+      </Section>
+    </>
+  );
+};

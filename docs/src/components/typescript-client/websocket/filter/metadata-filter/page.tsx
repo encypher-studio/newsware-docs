@@ -1,18 +1,18 @@
-import Code from "@/components/code/code";
-import Section from "@/components/section/section";
+import { Code, Section } from "@newsware/ui";
 import { actionTable } from "../../common";
 
-export default function MetadataFilter() {
-    return (
-        <>
-            <Section title="Metadata filter" >
-                <p>
-                    A metadata filter can be used to filter news by: Tickers, Sources, CategoryCodes, and Ciks (only for SEC filings).
-                </p>
-            </Section>
-            <Section title="Definition">
-                <Code language="typescript">
-                    {`export class Tickers/CategoryCodes/Sources/Ciks {
+export const MetadataFilter = () => {
+  return (
+    <>
+      <Section title="Metadata filter">
+        <p>
+          A metadata filter can be used to filter news by: Tickers, Sources,
+          CategoryCodes, and Ciks (only for SEC filings).
+        </p>
+      </Section>
+      <Section title="Definition">
+        <Code language="typescript">
+          {`export class Tickers/CategoryCodes/Sources/Ciks {
     static any(value: string | string[]) {
         ...
     }
@@ -25,32 +25,24 @@ export default function MetadataFilter() {
         ...
     }
 }`}
-                </Code>
-            </Section>
-            <Section title="Methods">
-                {actionTable()}
-            </Section>
-            <Section title="Usage">
-                <p>
-                    This query will retrieve if ANY is true:
-
-                    <ul className="mt-6 ml-6 list-disc">
-                        <li>
-                            Has "BTC" AND "ETH" as tickers.
-                        </li>
-                        <li>
-                            Does NOT belong to the DowJones (DJ) NOR Hammerstone (HS) sources.
-                        </li>
-                        <li>
-                            Has the Mergers & Acquisitions (MA) OR FOREX category codes.
-                        </li>
-                        <li>
-                            Has as Ciks 1805719 AND 1557593
-                        </li>
-                    </ul>
-                </p>
-                <Code language="typescript">
-                    {`import {Field, WebsocketResponse, WsApi, Or, Tickers, Sources, CategoryCodes, Ciks} from "newsware";
+        </Code>
+      </Section>
+      <Section title="Methods">{actionTable()}</Section>
+      <Section title="Usage">
+        <div className="grid gap-2">
+          <p>This query will retrieve if ANY is true:</p>
+          <ul className="ml-6 list-disc">
+            <li>Has "BTC" AND "ETH" as tickers.</li>
+            <li>
+              Does NOT belong to the DowJones (DJ) NOR Hammerstone (HS) sources.
+            </li>
+            <li>
+              Has the Mergers & Acquisitions (MA) OR FOREX category codes.
+            </li>
+            <li>Has as Ciks 1805719 AND 1557593</li>
+          </ul>
+          <Code language="typescript">
+            {`import {Field, WebsocketResponse, WsApi, Or, Tickers, Sources, CategoryCodes, Ciks} from "newsware";
 
 const wsApi = new WsApi({
     apiKey: apiKey,
@@ -75,8 +67,9 @@ const wsApi = new WsApi({
     }
 })
 wsApi.connect()`}
-                </Code>
-            </Section>
-        </>
-    )
-}
+          </Code>
+        </div>
+      </Section>
+    </>
+  );
+};
