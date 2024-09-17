@@ -1,9 +1,8 @@
 import { IEnvironment } from "@newsware/ui";
-import { Api } from "newsware";
 import React, { PropsWithChildren, useContext } from "react";
 
 interface IServiceContext {
-  api: Api;
+  environment: IEnvironment;
 }
 
 const ServiceContext = React.createContext<IServiceContext | null>(null);
@@ -16,12 +15,10 @@ export const ServiceProvider = ({
   children,
   environment,
 }: PropsWithChildren<IProps>) => {
-  const api = new Api("", environment.apiEndpointDescription);
-
   return (
     <ServiceContext.Provider
       value={{
-        api,
+        environment,
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 import { useServiceContext } from "@/lib/context/service";
 import { ColumnDef, DataTable, Section } from "@newsware/ui";
-import { SourceDetails } from "newsware";
+import { Api, SourceDetails } from "newsware";
 import { useEffect, useState } from "react";
 
 const sourceColumns: ColumnDef<SourceDetails>[] = [
@@ -26,11 +26,11 @@ const sourceColumns: ColumnDef<SourceDetails>[] = [
 
 export const Sources = () => {
   const [sources, setSources] = useState<SourceDetails[]>([]);
-  const { api } = useServiceContext();
+  const { environment } = useServiceContext();
 
   useEffect(() => {
-    api.getSources().then(setSources);
-  }, [api]);
+    Api.getSources(environment.apiEndpointDescription).then(setSources);
+  }, [environment]);
 
   return (
     <Section

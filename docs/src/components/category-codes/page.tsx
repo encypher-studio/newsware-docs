@@ -7,7 +7,7 @@ import {
   DataTable,
   Section,
 } from "@newsware/ui";
-import { CategoryCode } from "newsware";
+import { Api, CategoryCode } from "newsware";
 import { useEffect, useState } from "react";
 import { groupCodeColumns, sourceCodeColumns } from "./columns";
 
@@ -19,13 +19,16 @@ export const CategoryCodes = () => {
     }[]
   >([]);
   const [groups, setGroups] = useState<CategoryCode[]>([]);
-  const { api } = useServiceContext();
+  const { environment } = useServiceContext();
 
   useEffect(() => {
-    api.getSources().then(async (sources) => {
+    Api.getSources(environment.apiEndpointDescription).then(async (sources) => {
       const sourcesNew = [];
       for (const source of sources) {
-        let categoryCodes = await api.getCategoryCodes(source.code);
+        let categoryCodes = await Api.getCategoryCodes(
+          source.code,
+          environment.apiEndpointDescription
+        );
         categoryCodes = categoryCodes.filter(
           (categoryCode) => !categoryCode.code.includes(" ")
         );
@@ -37,8 +40,10 @@ export const CategoryCodes = () => {
       setSources(sourcesNew);
     });
 
-    api.getCategoryCodes("group").then(setGroups);
-  }, [api]);
+    Api.getCategoryCodes("group", environment.apiEndpointDescription).then(
+      setGroups
+    );
+  }, [environment]);
 
   return (
     <Section
