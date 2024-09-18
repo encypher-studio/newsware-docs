@@ -13,7 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@newsware/ui": "^0.0.25",
+    "@newsware/ui": "^0.0.26",
     "newsware": "10.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
