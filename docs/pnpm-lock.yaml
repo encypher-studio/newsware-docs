@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@newsware/ui':
-        specifier: ^0.0.26
-        version: 0.0.26(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.12)(ws@8.17.0)
+        specifier: ^0.0.27
+        version: 0.0.27(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.12)(ws@8.17.0)
       newsware:
         specifier: 10.0.7
         version: 10.0.7(ws@8.17.0)
@@ -479,8 +479,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@newsware/ui@0.0.26':
-    resolution: {integrity: sha512-XqMEwW/6H4Asd4T0MeIHB/DyxZCASTPxLTzZ5d9KHHfYhrEF5fIJy7tAd6KrfDyCfZNqUHns74FcOvJ5r1RQTQ==}
+  '@newsware/ui@0.0.27':
+    resolution: {integrity: sha512-yI1IMIm2P2rYvIuLcv4OshPV4pOKc6cy5R6Ic3GfsIL6Pdqe/NCwAzUfZ58zyDq/O0hjlki2R2fwgU+6TCGnmg==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2762,7 +2762,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@newsware/ui@0.0.26(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.12)(ws@8.17.0)':
+  '@newsware/ui@0.0.27(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.12)(ws@8.17.0)':
     dependencies:
       '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
