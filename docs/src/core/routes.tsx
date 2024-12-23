@@ -1,5 +1,5 @@
 import {
-  CategoryCodes,
+  Codes,
   ConditionFilter,
   Connect,
   Considerations,
@@ -11,10 +11,10 @@ import {
   Sources,
   Subscribe,
   TextFilter,
-} from "@/components";
-import { ServiceProvider } from "@/lib/context/service";
-import { IEnvironment, RouteOption } from "@newsware/ui";
-import { Outlet } from "react-router-dom";
+} from "@/components"
+import { ServiceProvider } from "@/lib/context/service"
+import { IEnvironment, RouteOption } from "@newsware/ui"
+import { Outlet } from "react-router-dom"
 
 export const appRoutes = (environment: IEnvironment): RouteOption[] => [
   {
@@ -106,9 +106,9 @@ export const appRoutes = (environment: IEnvironment): RouteOption[] => [
         ],
       },
       {
-        title: "Category Codes",
-        element: <CategoryCodes />,
-        path: "category-codes",
+        title: "Codes",
+        element: <Codes />,
+        path: "codes",
       },
       {
         title: "Sources",

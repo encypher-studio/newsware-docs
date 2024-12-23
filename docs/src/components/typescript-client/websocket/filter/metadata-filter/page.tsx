@@ -1,5 +1,5 @@
-import { Code, Section } from "@newsware/ui";
-import { actionTable } from "../../common";
+import { Code, Section } from "@newsware/ui"
+import { actionTable } from "../../common"
 
 export const MetadataFilter = () => {
   return (
@@ -7,12 +7,12 @@ export const MetadataFilter = () => {
       <Section title="Metadata filter">
         <p>
           A metadata filter can be used to filter news by: Tickers, Sources,
-          CategoryCodes, and Ciks (only for SEC filings).
+          Codes, and Ciks (only for SEC filings).
         </p>
       </Section>
       <Section title="Definition">
         <Code language="typescript">
-          {`export class Tickers/CategoryCodes/Sources/Ciks {
+          {`export class Tickers/Codes/Sources/Ciks {
     static any(value: string | string[]) {
         ...
     }
@@ -37,12 +37,12 @@ export const MetadataFilter = () => {
               Does NOT belong to the DowJones (DJ) NOR Hammerstone (HS) sources.
             </li>
             <li>
-              Has the Mergers & Acquisitions (MA) OR FOREX category codes.
+              Has the Mergers & Acquisitions (MA) OR FOREX codes.
             </li>
             <li>Has as Ciks 1805719 AND 1557593</li>
           </ul>
           <Code language="typescript">
-            {`import {Field, WebsocketResponse, WsApi, Or, Tickers, Sources, CategoryCodes, Ciks} from "newsware";
+            {`import {Field, WebsocketResponse, WsApi, Or, Tickers, Sources, Codes, Ciks} from "newsware";
 
 const wsApi = new WsApi({
     apiKey: apiKey,
@@ -54,7 +54,7 @@ const wsApi = new WsApi({
             filter: Or(
                 Tickers.all(["BTC", "ETH"]),
                 Sources.exclude(["DJ", "HS"]),
-                CategoryCodes.any(["MA", "FOREX"]),
+                Codes.any(["MA", "FOREX"]),
                 Ciks.all[1805719, 1557593]
             )
         })

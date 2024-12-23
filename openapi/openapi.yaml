@@ -168,7 +168,21 @@ components:
             type: string
           description: A set of category codes assigned by the news sources
           examples:
-            - [MA]
+            - ma
+        industryCodes:
+          type: array
+          items:
+            type: string
+          description: A set of industry codes assigned by the news sources
+          examples:
+            - finance
+        regionCodes:
+          type: array
+          items:
+            type: string
+          description: A set of region codes assigned by the news sources
+          examples:
+            - finland
     GetNewsRequest:
       description: |
         Used to filter news by publication time, tickers and a query.
@@ -337,7 +351,7 @@ components:
           type: string
           enum:
             - tickers
-            - categoryCodes
+            - codes
             - source
             - ciks
           examples:
@@ -409,5 +423,7 @@ components:
         - receivedTime
         - creationTime
         - categoryCodes
+        - industryCodes
+        - regionCodes
         - ciks
         - link

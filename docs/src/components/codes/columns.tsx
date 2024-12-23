@@ -1,16 +1,16 @@
-import { ColumnDef } from "@newsware/ui";
-import { CategoryCode } from "newsware";
+import { ColumnDef } from "@newsware/ui"
+import { Code } from "newsware"
 
-export const sourceCodeColumns: ColumnDef<CategoryCode>[] = [
+export const sourceCodeColumns: ColumnDef<Code>[] = [
   {
     accessorKey: "code",
     header: "Code",
-    accessorFn: (row: CategoryCode) => row.source + "." + row.code,
+    accessorFn: (row: Code) => row.source + "." + row.code,
   },
   {
     accessorKey: "description",
     header: "Description",
-    accessorFn: (row: CategoryCode) =>
+    accessorFn: (row: Code) =>
       row.description.length > 0
         ? row.description
         : row.code.charAt(0).toUpperCase() +
@@ -18,7 +18,7 @@ export const sourceCodeColumns: ColumnDef<CategoryCode>[] = [
   },
 ];
 
-export const groupCodeColumns: ColumnDef<CategoryCode>[] = [
+export const groupCodeColumns: ColumnDef<Code>[] = [
   {
     accessorKey: "code",
     header: "Code",
@@ -30,7 +30,7 @@ export const groupCodeColumns: ColumnDef<CategoryCode>[] = [
   {
     accessorKey: "children",
     header: "Associated codes",
-    accessorFn: (row: CategoryCode) =>
+    accessorFn: (row: Code) =>
       row.children?.map((child) => child.source + "." + child.code).join("\n"),
   },
 ];

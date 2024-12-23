@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@newsware/ui':
-        specifier: ^0.0.27
-        version: 0.0.27(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.12)(ws@8.17.0)
+        specifier: ^0.0.30
+        version: 0.0.30(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.12)(ws@8.17.0)
       newsware:
-        specifier: 10.0.7
-        version: 10.0.7(ws@8.17.0)
+        specifier: 10.0.9
+        version: 10.0.9(ws@8.17.0)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -479,8 +479,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@newsware/ui@0.0.27':
-    resolution: {integrity: sha512-yI1IMIm2P2rYvIuLcv4OshPV4pOKc6cy5R6Ic3GfsIL6Pdqe/NCwAzUfZ58zyDq/O0hjlki2R2fwgU+6TCGnmg==}
+  '@newsware/ui@0.0.30':
+    resolution: {integrity: sha512-MNI+pZUYu9Fp39p3Sk3qRPs19fjbWzBeYh0ZSjWj287xv83ik+r9/BUZjpgUNGPH49YcxbhJR/OZW8BEG0y0mg==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1758,8 +1758,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  newsware@10.0.7:
-    resolution: {integrity: sha512-iw8k9f9bHxVQdWSRnHMrAxhtXkC963q2480l6Fkz4rWjzBCNzoLMUKlZ7UEt346G5iYVV62aTSa2UgMc49B2mA==}
+  newsware@10.0.9:
+    resolution: {integrity: sha512-Pi89sWXUOx1GZYfDkdwM5tTNbuWLPe7WLJbjxq1oOH3uEPDKjmDG4bSe7iDUJQnbwARxB/p61hX+UQ+1YWhnPA==}
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -2762,7 +2762,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@newsware/ui@0.0.27(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.12)(ws@8.17.0)':
+  '@newsware/ui@0.0.30(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.12)(ws@8.17.0)':
     dependencies:
       '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2784,7 +2784,7 @@ snapshots:
       date-fns: 3.6.0
       firebase: 10.13.2
       lucide-react: 0.439.0(react@18.3.1)
-      newsware: 10.0.7(ws@8.17.0)
+      newsware: 10.0.9(ws@8.17.0)
       react-day-picker: 9.0.9(react@18.3.1)
       react-syntax-highlighter: 15.5.0(react@18.3.1)
       tailwind-merge: 2.5.2
@@ -4074,7 +4074,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  newsware@10.0.7(ws@8.17.0):
+  newsware@10.0.9(ws@8.17.0):
     dependencies:
       isomorphic-fetch: 3.0.0
       isomorphic-ws: 5.0.0(ws@8.17.0)

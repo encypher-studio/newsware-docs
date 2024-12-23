@@ -1,6 +1,6 @@
-import { Code, ColumnDef, DataTable, Section } from "@newsware/ui";
-import React from "react";
-import { Link } from "react-router-dom";
+import { Code, ColumnDef, DataTable, Section } from "@newsware/ui"
+import React from "react"
+import { Link } from "react-router-dom"
 
 interface SubscribeArguments {
   name: string;
@@ -93,6 +93,8 @@ export const Subscribe = () => {
     RECEIVED_TIME = "receivedTime",
     CREATION_TIME = "creationTime",
     CATEGORY_CODES = "categoryCodes",
+    REGION_CODES = "regionCodes",
+    INDUSTRY_CODES = "industryCodes",
     CIKS = "ciks",
     LINK = "link"
 }`}

@@ -225,7 +225,21 @@ components:
             type: string
           description: A set of category codes assigned by the news sources
           example:
-            - MA
+            - ma
+        industryCodes:
+          type: array
+          items:
+            type: string
+          description: A set of industry codes assigned by the news sources
+          example:
+            - finance
+        regionCodes:
+          type: array
+          items:
+            type: string
+          description: A set of region codes assigned by the news sources
+          example:
+            - finland
     NewsFilter:
       description: |
         Used to filter news by different criteria.
@@ -355,7 +369,7 @@ components:
           type: string
           enum:
             - tickers
-            - categoryCodes
+            - codes
             - source
             - ciks
           example: tickers
