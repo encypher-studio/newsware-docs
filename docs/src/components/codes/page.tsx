@@ -106,11 +106,7 @@ export const Codes = () => {
           <SelectGroup>
             <SelectLabel>Sources</SelectLabel>
             {sources.map((source) => (
-              <SelectItem
-                key={source.source}
-                onClick={() => ensureCodes(source.source, CodeType.CATEGORY)}
-                value={source.source}
-              >
+              <SelectItem key={source.source} value={source.source}>
                 {source.name}
               </SelectItem>
             ))}
