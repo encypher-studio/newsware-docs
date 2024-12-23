@@ -1,10 +1,11 @@
-import { useServiceContext } from "@/lib/context/service";
+import { useServiceContext } from "@/lib/context/service"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
   DataTable,
+  Label,
   Section,
   Select,
   SelectContent,
@@ -14,25 +15,25 @@ import {
   SelectTrigger,
   SelectValue,
   Skeleton,
-} from "@newsware/ui";
-import { Api, Code, CodeType } from "newsware";
-import { useEffect, useState } from "react";
-import { groupCodeColumns, sourceCodeColumns } from "./columns";
+} from "@newsware/ui"
+import { Api, Code, CodeType } from "newsware"
+import { useEffect, useState } from "react"
+import { groupCodeColumns, sourceCodeColumns } from "./columns"
 
 export const Codes = () => {
   const [sources, setSources] = useState<
     {
-      source: string;
-      name: string;
-      [CodeType.CATEGORY]?: Code[];
-      [CodeType.REGION]?: Code[];
-      [CodeType.INDUSTRY]?: Code[];
-      [CodeType.GROUP]?: Code[];
+      source: string
+      name: string
+      [CodeType.CATEGORY]?: Code[]
+      [CodeType.REGION]?: Code[]
+      [CodeType.INDUSTRY]?: Code[]
+      [CodeType.GROUP]?: Code[]
     }[]
-  >([]);
-  const { environment } = useServiceContext();
-  const [selectedSource, setSelectedSource] = useState<string>("group");
-  const [selectedCodeType, setSelectedCodeType] = useState<CodeType | "">("");
+  >([])
+  const { environment } = useServiceContext()
+  const [selectedSource, setSelectedSource] = useState<string>("group")
+  const [selectedCodeType, setSelectedCodeType] = useState<CodeType | "">("")
 
   useEffect(() => {
     Api.getSources(environment.apiEndpointDescription).then(async (sources) => {
@@ -41,63 +42,64 @@ export const Codes = () => {
           source: "group",
           name: "Curated by Newsware",
         },
-      ];
+      ]
       for (const source of sources) {
         sourcesNew.push({
           source: source.code,
           name: source.name === "" ? source.code : source.name,
-        });
+        })
       }
-      setSources(sourcesNew);
-    });
+      setSources(sourcesNew)
+    })
 
-    ensureCodes("group", CodeType.GROUP);
-  }, [environment]);
+    ensureCodes("group", CodeType.GROUP)
+  }, [environment])
 
   useEffect(() => {
-    console.log(selectedSource, selectedCodeType);
+    console.log(selectedSource, selectedCodeType)
     if (selectedSource !== "group" && selectedCodeType !== "") {
-      ensureCodes(selectedSource, selectedCodeType);
+      ensureCodes(selectedSource, selectedCodeType)
     }
-  }, [selectedSource, selectedCodeType]);
+  }, [selectedSource, selectedCodeType])
 
   const ensureCodes = async (source: string, typ: CodeType) => {
     let shouldFetch =
-      sources.find((s) => s.source === source)?.[typ] === undefined;
+      sources.find((s) => s.source === source)?.[typ] === undefined
 
     if (shouldFetch) {
       const codes = await Api.getCodes(
         source === "group" ? "" : source,
         typ,
         environment.apiEndpointDescription
-      );
+      )
       setSources((prev) => {
         const newSources = prev.map((s) => {
           if (s.source === source) {
             switch (typ) {
               case CodeType.CATEGORY:
-                return { ...s, [CodeType.CATEGORY]: codes };
+                return { ...s, [CodeType.CATEGORY]: codes }
               case CodeType.REGION:
-                return { ...s, [CodeType.REGION]: codes };
+                return { ...s, [CodeType.REGION]: codes }
               case CodeType.INDUSTRY:
-                return { ...s, [CodeType.INDUSTRY]: codes };
+                return { ...s, [CodeType.INDUSTRY]: codes }
               case CodeType.GROUP:
-                return { ...s, [CodeType.GROUP]: codes };
+                return { ...s, [CodeType.GROUP]: codes }
             }
           }
-          return s;
-        });
-        console.log(newSources);
-        return newSources;
-      });
+          return s
+        })
+        console.log(newSources)
+        return newSources
+      })
     }
-  };
+  }
 
   return (
     <Section
       title="Codes"
       description="Used to organize news. They can be used to filter results by category, region and industry."
     >
+      <Label>Select source</Label>
       <Select value={selectedSource} onValueChange={setSelectedSource}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select a source" />
@@ -167,8 +169,8 @@ export const Codes = () => {
           </Accordion>
         )}
     </Section>
-  );
-};
+  )
+}
 
 const SkeletonItem = () => (
   <div className="grid grid-cols-[1fr_1fr_4fr] gap-2">
@@ -176,4 +178,4 @@ const SkeletonItem = () => (
     <Skeleton className="h-[15px] rounded-full" />
     <Skeleton className="h-[15px] rounded-full" />
   </div>
-);
+)
