@@ -12,8 +12,11 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "pnpm": {
+    "neverBuiltDependencies": []
+  },
   "dependencies": {
-    "@newsware/ui": "^0.0.30",
+    "@newsware/ui": "^0.0.35",
     "newsware": "10.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -31,8 +34,9 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "postcss": "^8.4.38",
-    "tailwindcss": "^3.4.12",
+    "tailwindcss": "^4.1.9",
     "typescript": "^5.2.2",
+    "@tailwindcss/vite": "^4.1.9",
     "vite": "^5.2.0"
   }
 }
