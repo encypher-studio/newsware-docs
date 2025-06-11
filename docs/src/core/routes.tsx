@@ -15,6 +15,7 @@ import {
 import { ServiceProvider } from "@/lib/context/service"
 import { IEnvironment, RouteOption } from "@newsware/ui"
 import { Outlet } from "react-router-dom"
+import {QueryLanguage} from "@/components/query-language";
 
 export const appRoutes = (environment: IEnvironment): RouteOption[] => [
   {
@@ -35,6 +36,11 @@ export const appRoutes = (environment: IEnvironment): RouteOption[] => [
         forceExact: true,
         path: "asyncapi",
         targetBlank: true,
+      },
+      {
+        title: "Query Language",
+        element: <QueryLanguage />,
+        path: "query-language",
       },
       {
         title: "Home",

@@ -16,6 +16,9 @@
   "bugs": {
     "url": "https://github.com/encypher-studio/newsware_clients_documentation/issues"
   },
+  "pnpm": {
+    "neverBuiltDependencies": []
+  },
   "homepage": "https://github.com/encypher-studio/newsware_clients_documentation#readme",
   "dependencies": {
     "@asyncapi/cli": "^1.2.15",
