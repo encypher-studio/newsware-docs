@@ -6,7 +6,7 @@ info:
     Subscribe to real-time news.
 servers:
   public:
-    host: newswareapi.encypherstudio.com
+    host: api.newsware.com
     pathname: /ws/v3?apikey={apikey}
     protocol: wss
     variables:
@@ -168,7 +168,9 @@ components:
           examples:
             - ["body", "headline"]
         filter:
-          $ref: "#/components/schemas/NewsFilter"
+          type: string
+          description: |
+            A query using our query language: https://docs.newsware.com/query-language
     News:
       type: object
       properties:
@@ -240,150 +242,6 @@ components:
           description: A set of region codes assigned by the news sources
           example:
             - finland
-    NewsFilter:
-      description: |
-        Used to filter news by different criteria.
-      oneOf:
-        - $ref: "#/components/schemas/TextQuery"
-        - $ref: "#/components/schemas/ConditionQuery"
-        - $ref: "#/components/schemas/MetadataQuery"
-    ConditionQuery:
-      title: Condition filter
-      type: object
-      description: |
-        Used to join multiple value using an AND, AND NOT or OR condition.
-
-        Example, search for news that contains "bitcoin" or "ethereum" in the headline AND don't contain "scam" in the body:
-        ```json
-        {
-          "type": "and",
-          "value": [
-            {
-              "type": "text",
-              "action": "any",
-              "value": ["bitcoin", "ethereum"],
-              "onlyHeadline": true
-            },
-            {
-              "type": "text",
-              "action": "exclude",
-              "value": ["scam"],
-              "onlyBody": true
-            }
-          ]
-        }
-        ```
-
-
-        Example, search for news that fulfill one of the following:
-          - Mention "bitcoin" AND "bull run" in the headline
-          - Mention "dollar", in the headline
-        ```json
-        {
-          "type": "or",
-          "value": [
-            {
-                "type": "text",
-                "action": "all",
-                "value": ["bitcoin", "bull run"], 
-                "onlyHeadline": true
-            },
-            { 
-              "type": "text",
-              "action": "any",
-              "value": ["dollar"],
-              "onlyHeadline": true
-            }
-          ]
-        }
-
-        Example, search for news that fulfill all of the following:
-          - Don't mention "bitcoin"
-          - Don't have "BTC" as ticker.
-        ```json
-        {
-          "type": "andNot",
-          "value": [
-            {
-                "type": "text",
-                "action": "any",
-                "value": ["bitcoin"]
-            },
-            { 
-              "type": "ticker",
-              "action": "any",
-              "value": ["BTC"]
-            }
-          ]
-        }
-        ```
-      properties:
-        type:
-          type: string
-          enum: ["and", "or", "andNot"]
-        value:
-          type: array
-          items:
-            oneOf:
-              - $ref: "#/components/schemas/TextQuery"
-              - $ref: "#/components/schemas/ConditionQuery"
-              - $ref: "#/components/schemas/MetadataQuery"
-    TextQuery:
-      title: Text filter
-      type: object
-      description: |
-        Used to retrieve or exclude news containing various texts. If action is "all" a match will occur if all the texts are mentioned in the news, if "any" a match will occur if any of the items are mentioned, if "exclude" a match will
-        occur if none of the texts are mentioned.
-      properties:
-        type:
-          type: string
-          const: text
-        action:
-          $ref: "#/components/schemas/ActionType"
-          example: any
-        value:
-          type: array
-          items:
-            type: string
-          description: Texts to search for
-          example:
-            - bitcoin
-            - ethereum
-        onlyBody:
-          type: boolean
-          description: If true, the value will be searched only in the body of the news, and not the headline.
-          example: false
-        onlyHeadline:
-          type: boolean
-          description: If true, the value will be searched only in the headline.
-          example: false
-    MetadataQuery:
-      title: Metadata filter
-      type: object
-      description: |
-        Used to search by metadata. If action is "all" a match will occur if all the value items
-        are present, if "any" a match will occur if any of the items are present, if "exclude" a match will
-        occur if none of the value items are present.
-      properties:
-        type:
-          type: string
-          enum:
-            - tickers
-            - codes
-            - source
-            - ciks
-          example: tickers
-        action:
-          $ref: "#/components/schemas/ActionType"
-          example: any
-        value:
-          type: array
-          items:
-            type: string
-          description: Values to search for
-          example:
-            - APPL
-            - BTC
     Source:
       type: string
       enum:
