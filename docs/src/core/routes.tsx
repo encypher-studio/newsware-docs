@@ -11,6 +11,7 @@ import {
   Sources,
   Subscribe,
   TextFilter,
+  Topics,
 } from "@/components"
 import { ServiceProvider } from "@/lib/context/service"
 import { IEnvironment, RouteOption } from "@newsware/ui"
@@ -120,6 +121,11 @@ export const appRoutes = (environment: IEnvironment): RouteOption[] => [
         title: "Sources",
         element: <Sources />,
         path: "sources",
+      },
+      {
+        title: "Topics",
+        element: <Topics />,
+        path: "topics",
       },
     ],
   },
