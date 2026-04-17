@@ -267,7 +267,8 @@ components:
         - source
         - publicationTime
         - receivedTime
-        - creationTime
         - categoryCodes
+        - industryCodes
+        - regionCodes
         - ciks
         - link
