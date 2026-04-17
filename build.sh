@@ -12,4 +12,4 @@ rm -rf build
 cp -r ./docs/dist ./build
 
 pnpm install
-pnpm dlx @asyncapi/cli generate fromTemplate ./asyncapi/asyncapi.yaml @asyncapi/html-template@2.0.0 -o build/asyncapi
+pnpm dlx @asyncapi/cli@5 generate fromTemplate ./asyncapi/asyncapi.yaml @asyncapi/html-template@3.5.6 -o build/asyncapi
