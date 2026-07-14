@@ -60,6 +60,7 @@
                         "categoryCodes",
                         "industryCodes",
                         "regionCodes",
+                        "productCodes",
                         "ciks",
                         "link"
                       ],
@@ -285,6 +286,18 @@
                         "finland"
                       ],
                       "x-parser-schema-id": "<anonymous-schema-41>"
+                    },
+                    "productCodes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "x-parser-schema-id": "<anonymous-schema-44>"
+                      },
+                      "description": "A set of product codes assigned by the news sources",
+                      "example": [
+                        "wsj"
+                      ],
+                      "x-parser-schema-id": "<anonymous-schema-43>"
                     }
                   },
                   "x-parser-schema-id": "News"
@@ -396,15 +409,6 @@
       "SubscribeRequestValue": "$ref:$.channels.communication.messages.SubscribeRequest.payload.properties.value",
       "News": "$ref:$.operations.subscribe.reply.messages[0].payload.properties.value",
       "Source": "$ref:$.operations.subscribe.reply.messages[0].payload.properties.value.properties.source",
-      "ActionType": {
-        "type": "string",
-        "enum": [
-          "any",
-          "all",
-          "exclude"
-        ],
-        "x-parser-schema-id": "ActionType"
-      },
       "Field": "$ref:$.channels.communication.messages.SubscribeRequest.payload.properties.value.properties.fields.items"
     }
   },
